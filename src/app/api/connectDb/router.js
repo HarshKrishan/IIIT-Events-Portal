@@ -1,20 +1,9 @@
-import mysql from 'mysql';
-// import mongoose from 'mongoose';
+import mysql from 'mysql2';
 
-// const connectMongoDB = () => {
-//     try {
-//         mongoose.connect(process.env.MONGODB_URI)
-//         console.log('MongoDB connected')
-//     } catch (error) {
-//         console.log("error connecting mongodb",error)
-//     }
-// }
-
-// export default connectMongoDB;
 const connection = mysql.createConnection({
-  host: "localhost",
+  host: "192.168.1.7",
   port: 3306,
-  database: "eventsportal",
+  database: "mydatabase",
   user: "webadmin",
   password: "Web@2023",
 });
@@ -27,7 +16,8 @@ const connectSql = ()=>{
 
     }catch(error){
         console.log("error connecting sql",error)
-    }    
+    } 
+   
 }
 
 

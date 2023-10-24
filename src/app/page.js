@@ -1,9 +1,9 @@
 
 import Image from 'next/image'
 import Link from "next/link";
-import connectSql from './api/connectDb/router';
+
 export default function Home() {
-  connectSql();
+  
 
   return (
     <div className="w-screen">
