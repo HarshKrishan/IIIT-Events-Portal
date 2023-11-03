@@ -1,10 +1,21 @@
-
+"use client";
 import Image from 'next/image'
 import Link from "next/link";
+import { useDispatch } from 'react-redux';
+import { setRole } from '@/store/slices/userSlice';
+import {useRouter} from 'next/navigation';
+import { useState } from 'react';
 
 export default function Home() {
-  
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [user,setUser]= useState("admin");
 
+  const handleLogin = () => {
+    dispatch(setRole(user));
+    router.push('/dashboardAdmin')
+
+  }
   return (
     <div className="w-screen">
       <div className="flex justify-center items-center h-screen main"></div>
@@ -21,6 +32,7 @@ export default function Home() {
             className="m-2 rounded-md p-1 w-3/5"
             type="text"
             placeholder="Username"
+            onChange={(e) => setUser(e.target.value)}
           />
           <input
             className="m-2 rounded-md p-1 w-3/5"
@@ -29,12 +41,13 @@ export default function Home() {
           />
           <div className="flex justify-between w-3/5 my-3">
             
-              <Link
-                href="/dashboardAdmin"
+              <button
+                // href="/dashboardAdmin"
+                onClick={handleLogin}
                 className="text-black bg-teal-400 rounded-md p-1 w-1/3 text-center"
               >
                 Login
-              </Link>
+              </button>
             
             <button className="text-black bg-teal-400 rounded-md p-1 w-1/3">
               SignUp

@@ -2,9 +2,43 @@
 import AddEvent from "@/components/AddEvent";
 import TopNavbar from "@/components/Navbar";
 import React, { useState } from "react";
-
+import EventTableRow from "@/components/EventTableRow";
 function Page() {
   const [visible, setVisible] = useState(false);
+
+  const events = [
+    {
+      id: 1,
+      name: "Pitch Cafe",
+      date: "22-10-2023",
+      organiser: "E-Cell",
+    },
+    {
+      id: 2,
+      name: "Pitch Cafe",
+      date: "22-10-2023",
+      organiser: "E-Cell",
+    },
+    {
+      id: 3,
+      name: "Pitch Cafe",
+      date: "22-10-2023",
+      organiser: "E-Cell",
+    },
+    {
+      id: 4,
+      name: "Pitch Cafe",
+      date: "22-10-2023",
+      organiser: "E-Cell",
+    },
+    {
+      id: 5,
+      name: "Pitch Cafe",
+      date: "25-10-2023",
+      organiser: "E-Cell",
+    },
+  ];
+
   const handleCLick = () => {
     setVisible(false);
   };
@@ -15,7 +49,7 @@ function Page() {
           <div className="flex justify-between">
             <h1 className="text-xl font-bold">Events</h1>
             <button
-              className="bg-teal-400 rounded-md p-1"
+              className="bg-teal-400 rounded-md p-1 hover:bg-teal-500"
               onClick={() => {
                 setVisible(true);
               }}
@@ -34,46 +68,17 @@ function Page() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="border-r-4 border-slate-300">1.</td>
-                  <td className="border-r-4 border-slate-300">Pitch Cafe</td>
-                  <td className="border-r-4 border-slate-300">22-10-2023</td>
-                  <td className="border-r-4 border-slate-300">E-Cell</td>
-                </tr>
-                <tr>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    2.
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    Pitch Cafe
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    22-10-2023
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    E-Cell
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border-r-4 border-slate-300">3.</td>
-                  <td className="border-r-4 border-slate-300">Pitch Cafe</td>
-                  <td className="border-r-4 border-slate-300">22-10-2023</td>
-                  <td className="border-r-4 border-slate-300">E-Cell</td>
-                </tr>
-                <tr>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    4.
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    Pitch Cafe
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    22-10-2023
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    E-Cell
-                  </td>
-                </tr>
+                
+
+                {events.map((event) => (
+                  <EventTableRow
+                    key={event.id}
+                    id={event.id}
+                    name={event.name}
+                    date={event.date}
+                    organiser={event.organiser}
+                  />
+                ))}
               </tbody>
             </table>
           </div>

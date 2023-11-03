@@ -2,12 +2,30 @@
 import TopNavbar from '@/components/Navbar'
 import React,{useState} from 'react'
 import AddUser from '@/components/AddUser'
-
+import UserTableRow from '@/components/UserTableRow'
 function Page() {
   const [visible, setVisible] = useState(false);
   const handleCLick = () => {
     setVisible(false);
   };
+
+  const users = [
+    {
+      id: 1,
+      name: "Ankit",
+      role: "Admin",
+      email: "ankit@gmail.com",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Ankit2",
+      role: "Co-Admin",
+      email: "ankit2@gmail.com",
+      status: "Not-Active",
+    },
+  ];
+
   return (
     <div>
       <TopNavbar>
@@ -15,7 +33,7 @@ function Page() {
           <div className="flex justify-between">
             <h1 className="text-xl font-bold">Users</h1>
             <button
-              className="bg-teal-400 rounded-md p-1"
+              className="bg-teal-400 rounded-md p-1 hover:bg-teal-500"
               onClick={() => {
                 setVisible(true);
               }}
@@ -35,34 +53,18 @@ function Page() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="border-r-4 border-slate-300">1.</td>
-                  <td className="border-r-4 border-slate-300">Ankit</td>
-                  <td className="border-r-4 border-slate-300">Admin</td>
-                  <td className="border-r-4 border-slate-300">
-                    ankit@gmail.com
-                  </td>
-                  <td className="border-r-4 border-slate-300">Active</td>
-                </tr>
-                <tr>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    2.
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    Ankit2
-                  </td>
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    Co-Admin
-                  </td>
-
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    ankit2@gmail.com
-                  </td>
-
-                  <td className="border-r-4 border-slate-300 bg-teal-300">
-                    Not-Active
-                  </td>
-                </tr>
+              
+              {users.map((user) => (
+                <UserTableRow
+                  key={user.id}
+                  id={user.id}
+                  name={user.name}
+                  role={user.role}
+                  email={user.email}
+                  status={user.status}
+                />
+              ))}
+                
               </tbody>
             </table>
           </div>
