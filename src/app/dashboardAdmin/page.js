@@ -1,47 +1,29 @@
 "use client";
 import AddEvent from "@/components/AddEvent";
 import TopNavbar from "@/components/Navbar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EventTableRow from "@/components/EventTableRow";
 function Page() {
   const [visible, setVisible] = useState(false);
 
-  const events = [
-    {
-      id: 1,
-      name: "Pitch Cafe",
-      date: "22-10-2023",
-      organiser: "E-Cell",
-    },
-    {
-      id: 2,
-      name: "Pitch Cafe",
-      date: "22-10-2023",
-      organiser: "E-Cell",
-    },
-    {
-      id: 3,
-      name: "Pitch Cafe",
-      date: "22-10-2023",
-      organiser: "E-Cell",
-    },
-    {
-      id: 4,
-      name: "Pitch Cafe",
-      date: "22-10-2023",
-      organiser: "E-Cell",
-    },
-    {
-      id: 5,
-      name: "Pitch Cafe",
-      date: "25-10-2023",
-      organiser: "E-Cell",
-    },
-  ];
+  
 
   const handleCLick = () => {
     setVisible(false);
   };
+  
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/getAllEvents")
+      .then((res) => res.json())
+      .then((json) => {
+        setEvents(json.result);
+      });
+  },[]);
+
+
+
   return (
     <div>
       <TopNavbar>
@@ -70,13 +52,17 @@ function Page() {
               <tbody>
                 
 
-                {events.map((event) => (
+                {events.map((event, index) => (
+                  
                   <EventTableRow
-                    key={event.id}
-                    id={event.id}
-                    name={event.name}
-                    date={event.date}
-                    organiser={event.organiser}
+                    key={event.eventId}
+                    id={index + 1}
+                    name={event.eName}
+                    date={(()=>{
+                      const date = new Date(event.eDate);
+                      return date.toISOString().split('T')[0];
+                    })()}
+                    organiser={event.eOrgEmail}
                   />
                 ))}
               </tbody>

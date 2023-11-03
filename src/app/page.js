@@ -5,12 +5,13 @@ import { useDispatch } from 'react-redux';
 import { setRole } from '@/store/slices/userSlice';
 import {useRouter} from 'next/navigation';
 import { useState } from 'react';
-
+// import connectSql from './api/connectDb/router';
 export default function Home() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [user,setUser]= useState("admin");
 
+  // connectSql();
   const handleLogin = () => {
     dispatch(setRole(user));
     router.push('/dashboardAdmin')
