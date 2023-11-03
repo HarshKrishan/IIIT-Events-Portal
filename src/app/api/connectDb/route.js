@@ -1,7 +1,7 @@
 import mysql from 'mysql2';
 
 const connection = mysql.createConnection({
-  host: "192.168.1.7",
+  host: "localhost",
   port: 3306,
   database: "mydatabase",
   user: "webadmin",
@@ -27,3 +27,4 @@ connection.connect(function(err) {
 });
 
 export default connectSql;
+export {connection};

@@ -8,9 +8,6 @@ function TopNavbar({ children }) {
   const [logo, setLogo] = useState("IIITD");
   
   const user = useSelector((state) => state.user);
-  
-   
-   
 
   return (
     <div className="h-screen">

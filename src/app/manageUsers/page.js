@@ -1,30 +1,43 @@
 "use client"
 import TopNavbar from '@/components/Navbar'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import AddUser from '@/components/AddUser'
 import UserTableRow from '@/components/UserTableRow'
+
+
+
 function Page() {
   const [visible, setVisible] = useState(false);
   const handleCLick = () => {
     setVisible(false);
   };
-
-  const users = [
-    {
-      id: 1,
-      name: "Ankit",
-      role: "Admin",
-      email: "ankit@gmail.com",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Ankit2",
-      role: "Co-Admin",
-      email: "ankit2@gmail.com",
-      status: "Not-Active",
-    },
-  ];
+  const [data,setData] = useState([]);
+  
+  useEffect(()=>{
+    fetch('http://localhost:3000/api/getAllUsers')
+    .then(res => res.json())
+        .then(json =>
+          
+          // console.log(json),
+          setData(json.result)
+        )
+  },[]);
+  // const users = [
+  //   {
+  //     id: 1,
+  //     name: "Ankit",
+  //     role: "Admin",
+  //     email: "ankit@gmail.com",
+  //     status: "Active",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Ankit2",
+  //     role: "Co-Admin",
+  //     email: "ankit2@gmail.com",
+  //     status: "Not-Active",
+  //   },
+  // ];
 
   return (
     <div>
@@ -54,13 +67,13 @@ function Page() {
               </thead>
               <tbody>
               
-              {users.map((user) => (
+              {data.map((user,index) => (
                 <UserTableRow
-                  key={user.id}
-                  id={user.id}
-                  name={user.name}
+                  key={index+1}
+                  id={index+1}
+                  name={user.fName}
                   role={user.role}
-                  email={user.email}
+                  email={user.emailId}
                   status={user.status}
                 />
               ))}
