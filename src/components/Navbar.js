@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux";
 function TopNavbar({ children }) {
   const [show, setShow] = useState(false);
   const [logo, setLogo] = useState("IIITD");

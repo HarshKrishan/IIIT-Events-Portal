@@ -1,8 +1,36 @@
+"use client";
 import React from "react";
-
+import { useState } from "react";
 const AddUser = ({ visible, handleCLick }) => {
   if (!visible) return null;
   // bg-black  bg-opacity-20 backdrop-blur-sm
+  const [userName, setUserName] = useState("");
+  const [role, setRole] = useState("admin");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("active");
+
+
+  const handleSubmit=() => {
+    const data = {
+      userName: userName,
+      role: role,
+      email: email,
+      status: status,
+    };
+    console.log(data);
+    fetch("http://localhost:3000/api/users", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        handleCLick();
+      })
+      .then((json) => console.log(json));
+  };
   return (
     <div className="fixed inset-x-72 inset-y-5 bg-slate-200">
       <div className=" flex justify-center items-center">
@@ -16,11 +44,20 @@ const AddUser = ({ visible, handleCLick }) => {
                 className="m-2 rounded-md p-1 w-3/5"
                 type="text"
                 placeholder="User Name"
+                value={userName}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
               />
 
               <label className="text-black w-3/5">Role</label>
 
-              <select className="m-2 rounded-md p-1 w-3/5">
+              <select className="m-2 rounded-md p-1 w-3/5"
+              value={role}
+              onChange={(e) => {
+                setRole(e.target.value);
+              }}
+              >
                 <option value="admin">Admin</option>
                 <option value="co-admin">Co-Admin</option>
               </select>
@@ -30,10 +67,19 @@ const AddUser = ({ visible, handleCLick }) => {
                 className="m-2 rounded-md p-1 w-3/5"
                 type="email"
                 placeholder="xyz@gmail.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
               <label className="text-black w-3/5">Status</label>
 
-              <select className="m-2 rounded-md p-1 w-3/5">
+              <select className="m-2 rounded-md p-1 w-3/5"
+              value={status}
+              onChange={(e) => {
+                setStatus(e.target.value);
+              }}
+              >
                 <option value="admin">Active</option>
                 <option value="co-admin">Not-Active</option>
               </select>

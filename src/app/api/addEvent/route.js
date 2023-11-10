@@ -1,13 +1,13 @@
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
+import { useEffect } from "react";
 
 export async function POST(req) {
   console.log("entering addEvent route");
-    const [eName, eDate, eOrgEmail] = req.body;
-
-    console.log(eName, eDate, eOrgEmail);
+  const {imageId, eventId, imageUri} = await req.json();
+  
   connectSql();
-    const query = `INSERT INTO events (eName, eDate, eOrgEmail) VALUES ('${eName}', '${eDate}', '${eOrgEmail}')`;
+    const query = `INSERT INTO images (imageId, imageData, Events_eventId) VALUES (${imageId}, load_file(${FR}), ${eventId})`;
   const res = await connection
     .promise()
     .query(query)
