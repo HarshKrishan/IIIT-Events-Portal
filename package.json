@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.2",
     "net": "^1.0.2",
     "next": "13.5.6",
@@ -27,9 +28,9 @@
   },
   "browser": {
     "fs": false,
-    "path": false, 
-    "os": false, 
-    "net": false, 
+    "path": false,
+    "os": false,
+    "net": false,
     "tls": false
   },
   "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",

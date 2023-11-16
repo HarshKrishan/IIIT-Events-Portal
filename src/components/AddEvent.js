@@ -1,8 +1,15 @@
 "use client";
 import React from 'react'
 import { useState } from 'react'
+
+
+ export const config = {
+   api: {
+     bodyParser: false,
+   },
+ }; 
 const AddEvent = ({ visible, handleCLick }) => {
-  if (!visible) return null;
+  
 
   const [event, setEvent] = useState({
     name: "",
@@ -13,10 +20,29 @@ const AddEvent = ({ visible, handleCLick }) => {
     link: "",
     image: [],
   });
-
+  if (!visible) return null;
   const handleSubmit = async () => {
     // e.preventDefault();
     console.log("event",event);
+    const formdata = new FormData();
+    formdata.append("name", event.name);
+    formdata.append("date", event.date);
+    formdata.append("time", event.time);
+    formdata.append("description", event.description);
+    formdata.append("organiser", event.organiser);
+    formdata.append("link", event.link);
+    for (let i = 0; i < event.image.length; i++) {
+      formdata.append("image[]", event.image[i]);
+    }
+   
+    fetch("http://localhost:3000/api/addEvent", {
+      method: "POST",
+      body: formdata,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .then((json) => console.log(json)); 
     await handleCLick();
   }
   // bg-black  bg-opacity-20 backdrop-blur-sm

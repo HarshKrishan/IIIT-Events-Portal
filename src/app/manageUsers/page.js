@@ -3,6 +3,7 @@ import TopNavbar from '@/components/Navbar'
 import React,{useState,useEffect} from 'react'
 import AddUser from '@/components/AddUser'
 import UserTableRow from '@/components/UserTableRow'
+import UpdateUser from '@/components/UpdateUser'
 
 
 
@@ -10,7 +11,19 @@ function Page() {
   const [visible, setVisible] = useState(false);
   const handleCLick = () => {
     setVisible(false);
+
   };
+
+  const [updateUserVisible, setUpdateUserVisible] = useState(false);
+  const handleUpdateUserCLick = () => {
+
+    setUpdateUserVisible(false);
+  };
+
+  const markUpdateUserVisibleTrue = () => {
+    setUpdateUserVisible(true);
+  }
+
   const [data,setData] = useState([]);
   
   useEffect(()=>{
@@ -21,23 +34,8 @@ function Page() {
           // console.log(json),
           setData(json.result)
         )
-  },[]);
-  // const users = [
-  //   {
-  //     id: 1,
-  //     name: "Ankit",
-  //     role: "Admin",
-  //     email: "ankit@gmail.com",
-  //     status: "Active",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Ankit2",
-  //     role: "Co-Admin",
-  //     email: "ankit2@gmail.com",
-  //     status: "Not-Active",
-  //   },
-  // ];
+  },[visible]);
+  
 
   return (
     <div>
@@ -63,26 +61,28 @@ function Page() {
                   <th className="border-4 border-slate-300">Role</th>
                   <th className="border-4 border-slate-300">Email</th>
                   <th className="border-4 border-slate-300">Status</th>
+                  <th className="border-4 border-slate-300 w-20">Modify</th>
                 </tr>
               </thead>
               <tbody>
-              
-              {data.map((user,index) => (
-                <UserTableRow
-                  key={index+1}
-                  id={index+1}
-                  name={user.fName}
-                  role={user.role}
-                  email={user.emailId}
-                  status={user.status}
-                />
-              ))}
-                
+                {data.map((user, index) => (
+                  <UserTableRow
+                    key={index + 1}
+                    id={index + 1}
+                    name={user.fName}
+                    role={user.role}
+                    email={user.emailId}
+                    status={user.status}
+                    markUpdateUserVisibleTrue={markUpdateUserVisibleTrue}
+                    
+                  />
+                ))}
               </tbody>
             </table>
           </div>
         </div>
         <AddUser visible={visible} handleCLick={handleCLick} />
+        <UpdateUser visible={updateUserVisible} handleCLick={handleUpdateUserCLick} />
       </TopNavbar>
     </div>
   );

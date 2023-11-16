@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-const AddUser = ({ visible, handleCLick }) => {
-  
+const UpdateUser = ({ visible, handleCLick }) => {
   // bg-black  bg-opacity-20 backdrop-blur-sm
-  const [firstName,setFirstName] = useState("");
-  const [lastName,setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("admin");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("active");
@@ -13,7 +12,7 @@ const AddUser = ({ visible, handleCLick }) => {
 
   if (!visible) return null;
 
-  const handleSubmit=() => {
+  const handleSubmit = () => {
     const data = {
       firstName: firstName,
       lastName: lastName,
@@ -23,16 +22,9 @@ const AddUser = ({ visible, handleCLick }) => {
       status: status,
     };
     console.log(data);
-    if (
-      firstName === "" ||
-      lastName === "" ||
-      password === "" ||
-      email === "" ||
-      status === "" ||
-      role === ""
-    ) {
-      alert("Please fill all the fields");
-      return;
+    if(firstName==="" || lastName==="" || password==="" || email==="" || status==="" || role===""){
+        alert("Please fill all the fields");
+        return;
     }
     fetch("http://localhost:3000/api/addUser", {
       method: "POST",
@@ -44,13 +36,6 @@ const AddUser = ({ visible, handleCLick }) => {
       .then((response) => {
         console.log(response);
         handleCLick();
-        setFirstName("");
-        setLastName("");
-        setPassword("");
-        setEmail("");
-        setStatus("active");
-        setRole("admin");
-
       })
       .then((json) => console.log(json));
   };
@@ -58,7 +43,9 @@ const AddUser = ({ visible, handleCLick }) => {
     <div className="fixed inset-x-72 inset-y-5 bg-slate-200">
       <div className=" flex justify-center items-center">
         <div className=" w-4/5 flex-col items-center">
-          <h1 className="text-black text-2xl font-bold mt-10 mb-3">Add User</h1>
+          <h1 className="text-black text-2xl font-bold mt-10 mb-3">
+            Update User
+          </h1>
 
           <div>
             <div className="flex flex-col items-center gap-y-2">
@@ -139,11 +126,11 @@ const AddUser = ({ visible, handleCLick }) => {
                     handleSubmit();
                   }}
                 >
-                  Add User
+                  Update User
                 </button>
                 <button
                   className="text-black bg-teal-400 rounded-md p-1 w-1/3 hover:bg-teal-500"
-                  onClick={() => {
+                  onClick={()=>{
                     handleCLick();
                   }}
                 >
@@ -158,4 +145,4 @@ const AddUser = ({ visible, handleCLick }) => {
   );
 };
 
-export default AddUser;
+export default UpdateUser;

@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   console.log("entering addUser route");
   // console.log(req);
-  const {name, role, email, status} = await req.json();
+  const {firstName,lastName,password, role, email, status} = await req.json();
 
-  console.log(name, role, email, status);
+  console.log("Got this....",firstName,lastName,password, role, email, status);
   connectSql();
-    const query = `INSERT INTO users (fName, role, emailId, status) VALUES ('${name}', '${role}', '${email}', '${status}')`;
+    const query = `INSERT INTO users (fName,lname,pwd, role, emailId, status) VALUES ('${firstName}','${lastName}','${password}', '${role}', '${email}', '${status}')`;
   const res = await connection
     .promise()
     .query(query)
