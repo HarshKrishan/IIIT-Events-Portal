@@ -1,15 +1,37 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-const UpdateUser = ({ visible, handleCLick }) => {
+const UpdateUser = ({ visible, handleCLick, data }) => {
   // bg-black  bg-opacity-20 backdrop-blur-sm
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [role, setRole] = useState("admin");
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("active");
+  const userfname = data.fName;
+  const userlname = data.lName;
+  const userrole = data.role;
+  const useremail = data.emailId;
+  const userstatus = data.status;
+  // console.log(userfname, userlname, userrole, useremail, userstatus);
+  const [firstName, setFirstName] = useState(userfname);
+  const [lastName, setLastName] = useState(userlname);
+  const [role, setRole] = useState(userrole);
+  const [email, setEmail] = useState(useremail);
+  const [status, setStatus] = useState(userstatus);
   const [password, setPassword] = useState("");
+  // console.log(
+  //   "after updating",
+  //   firstName,
+  //   lastName,
+  //   role,
+  //   email,
+  //   status,
+  //   password
+  // );
 
+  useEffect(() => {
+    setFirstName(userfname);
+    setLastName(userlname);
+    setRole(userrole);
+    setEmail(useremail);
+    setStatus(userstatus);
+  }, [visible]);
   if (!visible) return null;
 
   const handleSubmit = () => {
@@ -22,11 +44,18 @@ const UpdateUser = ({ visible, handleCLick }) => {
       status: status,
     };
     console.log(data);
-    if(firstName==="" || lastName==="" || password==="" || email==="" || status==="" || role===""){
-        alert("Please fill all the fields");
-        return;
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      password === "" ||
+      email === "" ||
+      status === "" ||
+      role === ""
+    ) {
+      alert("Please fill all the fields");
+      return;
     }
-    fetch("http://localhost:3000/api/addUser", {
+    fetch("http://localhost:3000/api/updateUser", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -35,10 +64,18 @@ const UpdateUser = ({ visible, handleCLick }) => {
     })
       .then((response) => {
         console.log(response);
+        setFirstName("");
+        setLastName("");
+        setPassword("");
+        setEmail("");
+        setStatus("active");
+        setRole("admin");
         handleCLick();
       })
       .then((json) => console.log(json));
   };
+
+  
   return (
     <div className="fixed inset-x-72 inset-y-5 bg-slate-200">
       <div className=" flex justify-center items-center">
@@ -80,8 +117,18 @@ const UpdateUser = ({ visible, handleCLick }) => {
                   setRole(e.target.value);
                 }}
               >
-                <option value="admin">Admin</option>
-                <option value="co-admin">Co-Admin</option>
+                <option
+                  value="admin"
+                  selected={role === "admin" ? "selected" : ""}
+                >
+                  Admin
+                </option>
+                <option
+                  value="coadmin"
+                  selected={role === "coadmin" ? "selected" : ""}
+                >
+                  Co-Admin
+                </option>
               </select>
               <label className="text-black w-3/5">Email</label>
 
@@ -115,8 +162,18 @@ const UpdateUser = ({ visible, handleCLick }) => {
                   setStatus(e.target.value);
                 }}
               >
-                <option value="admin">Active</option>
-                <option value="co-admin">Not-Active</option>
+                <option
+                  value="active"
+                  selected={status === "active" ? "selected" : ""}
+                >
+                  Active
+                </option>
+                <option
+                  value="inactive"
+                  selected={status === "inactive" ? "selected" : ""}
+                >
+                  Not-Active
+                </option>
               </select>
 
               <div className="flex justify-between w-3/5 mt-3">
@@ -130,7 +187,14 @@ const UpdateUser = ({ visible, handleCLick }) => {
                 </button>
                 <button
                   className="text-black bg-teal-400 rounded-md p-1 w-1/3 hover:bg-teal-500"
-                  onClick={()=>{
+                  onClick={() => {
+                    setFirstName("");
+                    setLastName("");
+                    setPassword("");
+                    setEmail("");
+                    setStatus("active");
+                    setRole("admin");
+                    
                     handleCLick();
                   }}
                 >

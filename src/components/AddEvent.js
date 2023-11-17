@@ -19,6 +19,8 @@ const AddEvent = ({ visible, handleCLick }) => {
     organiser: "",
     link: "",
     image: [],
+    fundedBy: "",
+    fund:"",
   });
   if (!visible) return null;
   const handleSubmit = async () => {
@@ -31,6 +33,8 @@ const AddEvent = ({ visible, handleCLick }) => {
     formdata.append("description", event.description);
     formdata.append("organiser", event.organiser);
     formdata.append("link", event.link);
+    formdata.append("fundedBy", event.fundedBy);
+    formdata.append("fund", event.fund);
     for (let i = 0; i < event.image.length; i++) {
       formdata.append("image[]", event.image[i]);
     }
@@ -43,12 +47,24 @@ const AddEvent = ({ visible, handleCLick }) => {
         console.log(response);
       })
       .then((json) => console.log(json)); 
+    
+    setEvent({
+      name: "",
+      date: "",
+      time: "",
+      description: "",
+      organiser: "",
+      link: "",
+      image: [],
+      fundedBy: "",
+      fund:"",
+    });
     await handleCLick();
   }
   // bg-black  bg-opacity-20 backdrop-blur-sm
   return (
-    <div className="fixed inset-x-72 inset-y-5 bg-slate-200">
-      <div className=" flex justify-center items-center">
+    <div className="fixed inset-x-72 inset-y-5 bg-slate-200 overflow-auto">
+      <div className=" flex justify-center items-center overflow-auto">
         <div className=" w-4/5 flex-col items-center">
           <h1 className="text-black text-2xl font-bold my-5 ">Add Event</h1>
 
@@ -123,6 +139,32 @@ const AddEvent = ({ visible, handleCLick }) => {
 
               />
 
+              <label className="text-black w-3/5">Event Funded By</label>
+
+              <input
+                className="m-2 rounded-md p-1 w-3/5"
+                type="text"
+                placeholder="Event Funded By"
+                value={event.fundedBy}
+                onChange={(e) => {
+                  setEvent({ ...event, fundedBy: e.target.value });
+                }}
+
+              />
+
+              <label className="text-black w-3/5">Event Fund</label>
+
+              <input
+                className="m-2 rounded-md p-1 w-3/5"
+                type="text"
+                placeholder="Event Fund"
+                value={event.fund}
+                onChange={(e) => {
+                  setEvent({ ...event, fund: e.target.value });
+                }}
+              
+              />
+
               <label className="text-black w-3/5">Event Image</label>
 
               <input
@@ -134,7 +176,7 @@ const AddEvent = ({ visible, handleCLick }) => {
                   setEvent({ ...event, image: e.target.files });
                 }}
               />
-              <div className='flex justify-between w-3/5'>
+              <div className='flex justify-between w-3/5 mb-5'>
                 <button
                   className="text-black bg-teal-400 rounded-md p-1 w-1/3 hover:bg-teal-500"
                   onClick={() => {
@@ -147,6 +189,17 @@ const AddEvent = ({ visible, handleCLick }) => {
                 <button 
                 className="text-black bg-teal-400 rounded-md p-1 w-1/3 hover:bg-teal-500"
                 onClick={() => {
+                  setEvent({
+                    name: "",
+                    date: "",
+                    time: "",
+                    description: "",
+                    organiser: "",
+                    link: "",
+                    image: [],
+                    fundedBy: "",
+                    fund: "",
+                  });
                   handleCLick();
                 }}
               >

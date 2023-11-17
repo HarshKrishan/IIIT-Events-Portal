@@ -94,7 +94,7 @@ const AddUser = ({ visible, handleCLick }) => {
                 }}
               >
                 <option value="admin">Admin</option>
-                <option value="co-admin">Co-Admin</option>
+                <option value="coadmin">Co-Admin</option>
               </select>
               <label className="text-black w-3/5">Email</label>
 
@@ -128,8 +128,8 @@ const AddUser = ({ visible, handleCLick }) => {
                   setStatus(e.target.value);
                 }}
               >
-                <option value="admin">Active</option>
-                <option value="co-admin">Not-Active</option>
+                <option value="active">Active</option>
+                <option value="inactive">Not-Active</option>
               </select>
 
               <div className="flex justify-between w-3/5 mt-3">

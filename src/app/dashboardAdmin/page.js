@@ -3,10 +3,33 @@ import AddEvent from "@/components/AddEvent";
 import TopNavbar from "@/components/Navbar";
 import React, { useState, useEffect } from "react";
 import EventTableRow from "@/components/EventTableRow";
+import ShowEvent from "@/components/ShowEvent";
 function Page() {
   const [visible, setVisible] = useState(false);
 
-  
+  const [visibleShowEvent, setVisibleShowEvent] = useState(false);
+
+  const [eventDataToShow, setEventDataToShow] = useState({
+    eventId:"",
+    name: "",
+    date: "",
+    description: "",
+    organiser: "",
+    link: "",
+    image: [],
+    fundedBy: "",
+    fund: "",
+  });
+
+  const handleCLickShowEvent = () => {
+    setEventDataToShow({eventId:"",name:"",date:"",description:"",organiser:"",link:"",image:"",fundedBy:"",fund:""});
+    setVisibleShowEvent(false);
+  };
+
+  const markShowEventTrue = ({eventId,name,date,description,organiser,link,image,fundedBy,fund}) => {
+    setEventDataToShow({eventId,name,date,description,organiser,link,image,fundedBy,fund});
+    setVisibleShowEvent(true);
+  };
 
   const handleCLick = () => {
     setVisible(false);
@@ -22,7 +45,7 @@ function Page() {
       });
   },[]);
 
-
+  // console.log("events",events);
 
   return (
     <div>
@@ -47,6 +70,8 @@ function Page() {
                   <th className="border-4 border-slate-300">Event Name</th>
                   <th className="border-4 border-slate-300">Date</th>
                   <th className="border-4 border-slate-300">Event Organiser</th>
+                  <th className="border-4 border-slate-300">View</th>
+                  <th className="border-4 border-slate-300">Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,6 +81,7 @@ function Page() {
                   
                   <EventTableRow
                     key={event.eventId}
+                    eventId={event.eventId}
                     id={index + 1}
                     name={event.eName}
                     date={(()=>{
@@ -63,6 +89,11 @@ function Page() {
                       return date.toISOString().split('T')[0];
                     })()}
                     organiser={event.eOrgEmail}
+                    fundedBy = {event.fundedBy}
+                    fund = {event.fund}
+                    link={event.links}
+                    markShowEventTrue={markShowEventTrue}
+                    setEventDataToShow={setEventDataToShow}
                   />
                 ))}
               </tbody>
@@ -70,6 +101,7 @@ function Page() {
           </div>
         </div>
         <AddEvent visible={visible} handleCLick={handleCLick} />
+        <ShowEvent visible={visibleShowEvent} handleCLick={handleCLickShowEvent} data={eventDataToShow}/>
       </TopNavbar>
     </div>
   );

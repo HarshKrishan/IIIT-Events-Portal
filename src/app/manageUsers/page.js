@@ -9,6 +9,16 @@ import UpdateUser from '@/components/UpdateUser'
 
 function Page() {
   const [visible, setVisible] = useState(false);
+
+  const [userDataToShow, setUserDataToShow] = useState({
+    fName: "",
+    lName: "",
+    emailId: "",
+    password: "",
+    role: "",
+    status: "",
+  });
+
   const handleCLick = () => {
     setVisible(false);
 
@@ -20,9 +30,10 @@ function Page() {
     setUpdateUserVisible(false);
   };
 
-  const markUpdateUserVisibleTrue = () => {
+  const markUpdateUserVisibleTrue = ({ name, lname, role, email, status }) => {
+    setUserDataToShow({ fName: name, lName: lname, role: role, emailId: email, status: status });
     setUpdateUserVisible(true);
-  }
+  };
 
   const [data,setData] = useState([]);
   
@@ -70,6 +81,7 @@ function Page() {
                     key={index + 1}
                     id={index + 1}
                     name={user.fName}
+                    lname={user.lName}
                     role={user.role}
                     email={user.emailId}
                     status={user.status}
@@ -82,7 +94,7 @@ function Page() {
           </div>
         </div>
         <AddUser visible={visible} handleCLick={handleCLick} />
-        <UpdateUser visible={updateUserVisible} handleCLick={handleUpdateUserCLick} />
+        <UpdateUser visible={updateUserVisible} handleCLick={handleUpdateUserCLick} data={userDataToShow}/>
       </TopNavbar>
     </div>
   );
