@@ -43,7 +43,7 @@ function Page() {
       .then((json) => {
         setEvents(json.result);
       });
-  },[]);
+  },[visible]);
 
   // console.log("events",events);
 

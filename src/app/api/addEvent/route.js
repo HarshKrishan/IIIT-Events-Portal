@@ -1,14 +1,12 @@
+import { revalidatePath } from "next/cache";
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  
   console.log("Entering addEvent route");
 
   const data = await req.formData();
   console.log("data", data);
-
-
 
   const name = data.get("name");
   const date = data.get("date");
@@ -19,8 +17,8 @@ export async function POST(req) {
   const fund = data.get("fund");
   const path = `./public/uploads/${name}`;
   connectSql();
-  const query = `INSERT INTO events (eName, eDate, eOrgEmail, fundedBy, fund, links, imageURI, Users_emailId) VALUES ('${name}', '${date}', '${organiser}', ${fundedBy}, ${fund}, '${link}', '${name}', '${organiser}')`;
-  
+  const query = `INSERT INTO events (eName, eDate, eOrgEmail, fundedBy, fund, links, imageURI, Users_emailId) VALUES ('${name}', '${date}', '${organiser}', '${fundedBy}', '${fund}', '${link}', '${name}', '${organiser}')`;
+
   const res = await connection
     .promise()
     .query(query)
@@ -31,6 +29,6 @@ export async function POST(req) {
     .catch((err) => {
       console.log(err);
     });
-
+  revalidatePath("/dashboardAdmin");  // added this line to revalidate the dashboardAdmin page
   return NextResponse.json({ result: res }, { status: 200 });
 }

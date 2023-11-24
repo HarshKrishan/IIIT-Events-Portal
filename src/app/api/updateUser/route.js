@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
 
@@ -28,6 +29,6 @@ export async function POST(req) {
     .catch((err) => {
       console.log(err);
     });
-
+    revalidatePath("manaegeUsers")
   return NextResponse.json({ result: res }, { status: 200 });
 }

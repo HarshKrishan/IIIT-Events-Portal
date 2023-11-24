@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react'
 
@@ -9,7 +10,7 @@ import { useState } from 'react'
    },
  }; 
 const AddEvent = ({ visible, handleCLick }) => {
-  
+  const router = useRouter();
 
   const [event, setEvent] = useState({
     name: "",
@@ -59,6 +60,7 @@ const AddEvent = ({ visible, handleCLick }) => {
       fundedBy: "",
       fund:"",
     });
+     router.refresh();
     await handleCLick();
   }
   // bg-black  bg-opacity-20 backdrop-blur-sm

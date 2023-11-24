@@ -12,30 +12,37 @@ function EventTableRow(props) {
   // console.log("name ",name,"id: ",eventId);
   return (
     <tr key={id}>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{id}</td>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{name}</td>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{date}</td>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{organiser}</td>
-      <td
-        className={
-          id % 2 === 0
-            ? evenClass
-            : oddClass 
-        }
-      >
-        <div className="flex justify-center hover:cursor-pointer" onClick={()=>{
-          markShowEventTrue({eventId,name,date,organiser,fundedBy,fund,link});
-        }}>
+      <td className={id % 2 === 0 ? evenClass : oddClass}>
+        <div className="flex justify-center">{id}</div>
+      </td>
+      <td className={id % 2 === 0 ? evenClass : oddClass}>
+        <div className="flex justify-center">{name}</div>
+      </td>
+      <td className={id % 2 === 0 ? evenClass : oddClass}>
+        <div className="flex justify-center">{date}</div>
+      </td>
+      <td className={id % 2 === 0 ? evenClass : oddClass}>
+        <div className='flex justify-center'>{organiser}</div>
+      </td>
+      <td className={id % 2 === 0 ? evenClass : oddClass}>
+        <div
+          className="flex justify-center hover:cursor-pointer"
+          onClick={() => {
+            markShowEventTrue({
+              eventId,
+              name,
+              date,
+              organiser,
+              fundedBy,
+              fund,
+              link,
+            });
+          }}
+        >
           <Image src="/view.png" height={25} width={30} alt="view" />
         </div>
       </td>
-      <td
-        className={
-          id % 2 === 0
-            ? evenClass
-            : oddClass 
-        }
-      >
+      <td className={id % 2 === 0 ? evenClass : oddClass}>
         <div className="flex justify-center hover:cursor-pointer">
           <Image src="settings.svg" height={25} width={30} alt="setting" />
         </div>

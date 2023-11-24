@@ -1,11 +1,17 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+
 import { useState } from "react";
 const ShowEvent = ({ visible, handleCLick ,data}) => {
   // bg-black  bg-opacity-20 backdrop-blur-sm
   const[images,setImages] = useState([]);
-  if (!visible) return null;
+
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  
+
+  
 
   const handleSubmit = () => {
     const formdata = new FormData();
@@ -24,6 +30,41 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
       })
       .then((json) => console.log(json));
   }
+
+  const handleDelete = () => {
+    const formdata = new FormData();
+    formdata.append("eventId", data.eventId);
+
+    fetch("http://localhost:3000/api/deleteEvent", {
+      method: "POST",
+      body: formdata,
+    })
+      .then((response) => {
+        console.log(response);
+        handleCLick();
+      })
+      .then((json) => console.log(json));
+
+    handleCLick();
+    
+  }
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/getEventImages", {
+      method: "POST",
+      body: JSON.stringify({
+        eventId: data.eventId,
+      }),
+    })
+      .then(async (response) => await  response.json())
+      .then((json) => {
+        console.log(json);
+        setUploadedImages(json);
+      });
+  }, [visible]);
+
+
+  if (!visible) return null;
   return (
     <div className="fixed inset-x-72 inset-y-5 bg-slate-200">
       <div className=" flex justify-center items-center">
@@ -94,6 +135,16 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
                 />
               
             </div>
+          </div>
+          <div className="flex justify-center items-center mt-5">
+            <button
+              className="bg-red-400 rounded-md p-1 hover:bg-red-500"
+              onClick={() => {
+                handleDelete();
+              }}
+            >
+              Delete Event
+            </button>
           </div>
         </div>
       </div>

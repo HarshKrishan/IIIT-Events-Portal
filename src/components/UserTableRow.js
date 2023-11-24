@@ -16,30 +16,39 @@ function UserTableRow(props) {
 
   return (
     <>
-    
-    <tr key={id}>
-
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{id}</td>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{name+" "+lname}</td>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{role}</td>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{email}</td>
-      <td className={id % 2 === 0 ? evenClass : oddClass}>{status}</td>
-      <td
-        className={
-          id % 2 === 0
-            ? evenClass + "flex justify-center hover:cursor-pointer"
-            : oddClass + "flex justify-center hover:cursor-pointer"
-        }
-        onClick={() => {
-          // setVisible(true);
-          // setShow(true);
-          markUpdateUserVisibleTrue({name,lname,role,email,status});
-        }}
-      >
-        <Image src="settings.svg" height={25} width={30} alt="modify" />
-        
-      </td>
-    </tr>
+      <tr key={id}>
+        <td className={id % 2 === 0 ? evenClass : oddClass}>
+          <div className="flex justify-center">{id}</div>
+        </td>
+        <td className={id % 2 === 0 ? evenClass : oddClass}>
+          <div className="flex justify-center">{name + " " + lname}</div>
+        </td>
+        <td className={id % 2 === 0 ? evenClass : oddClass}>
+          <div className="flex justify-center">{role}</div>
+        </td>
+        <td className={id % 2 === 0 ? evenClass : oddClass}>
+          <div className="flex justify-center">{email}</div>
+        </td>
+        <td className={id % 2 === 0 ? evenClass : oddClass}>
+          <div className="flex justify-center">{status}</div>
+        </td>
+        <td
+          className={
+            id % 2 === 0
+              ? evenClass 
+              : oddClass
+          }
+          onClick={() => {
+            // setVisible(true);
+            // setShow(true);
+            markUpdateUserVisibleTrue({ name, lname, role, email, status });
+          }}
+        >
+          <div className='flex justify-center hover:cursor-pointer'>
+            <Image src="settings.svg" height={25} width={30} alt="modify" />
+          </div>
+        </td>
+      </tr>
     </>
   );
 }

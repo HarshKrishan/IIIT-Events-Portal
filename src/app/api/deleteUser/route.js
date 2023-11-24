@@ -3,13 +3,16 @@ import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  console.log("entering addUser route");
-  // console.log(req);
-  const {firstName,lastName,password, role, email, status} = await req.json();
+  console.log("Entering deleteUser route");
 
-  console.log("Got this....",firstName,lastName,password, role, email, status);
+  const data = await req.formData();
+  //   console.log("data", data);
+
+  const email = data.get("email");
+
   connectSql();
-    const query = `INSERT INTO users (fName,lname,pwd, role, emailId, status) VALUES ('${firstName}','${lastName}','${password}', '${role}', '${email}', '${status}')`;
+  const query = `DELETE FROM users WHERE emailId = '${email}';`;
+
   const res = await connection
     .promise()
     .query(query)
@@ -20,7 +23,6 @@ export async function POST(req) {
     .catch((err) => {
       console.log(err);
     });
-
-  revalidatePath("manaegeUsers")
+    revalidatePath("/manageUsers");  // added this line to revalidate the manageUsers page
   return NextResponse.json({ result: res }, { status: 200 });
 }

@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import Image from "next/image";
+
 const UpdateUser = ({ visible, handleCLick, data }) => {
   // bg-black  bg-opacity-20 backdrop-blur-sm
   const userfname = data.fName;
@@ -75,14 +77,49 @@ const UpdateUser = ({ visible, handleCLick, data }) => {
       .then((json) => console.log(json));
   };
 
+  const handleDelete = () => {
+    const formdata = new FormData();
+
+    formdata.append("email", email);
+    
+    fetch("http://localhost:3000/api/deleteUser", {
+      method: "POST",
+      body: formdata,
+      
+    })
+      .then((response) => {
+        console.log(response);
+        setFirstName("");
+        setLastName("");
+        setPassword("");
+        setEmail("");
+        setStatus("active");
+        setRole("admin");
+        handleCLick();
+      })
+      .then((json) => console.log(json));
+  };
   
   return (
     <div className="fixed inset-x-72 inset-y-5 bg-slate-200">
       <div className=" flex justify-center items-center">
         <div className=" w-4/5 flex-col items-center">
-          <h1 className="text-black text-2xl font-bold mt-10 mb-3">
-            Update User
-          </h1>
+          <div className="flex justify-between">
+            <div>
+              <h1 className="text-black text-2xl font-bold mt-10 mb-3">
+                Update User
+              </h1>
+            </div>
+
+            <div
+              className="mt-10 mb-3 hover:cursor-pointer"
+              onClick={() => {
+                handleCLick();
+              }}
+            >
+              <Image src="/close.png" height={25} width={30} alt="cross" />
+            </div>
+          </div>
 
           <div>
             <div className="flex flex-col items-center gap-y-2">
@@ -140,6 +177,7 @@ const UpdateUser = ({ visible, handleCLick, data }) => {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                disabled={true}
               />
 
               <label className="text-black w-3/5">Password</label>
@@ -186,7 +224,7 @@ const UpdateUser = ({ visible, handleCLick, data }) => {
                   Update User
                 </button>
                 <button
-                  className="text-black bg-teal-400 rounded-md p-1 w-1/3 hover:bg-teal-500"
+                  className="text-black bg-red-400 rounded-md p-1 w-1/3 hover:bg-red-500"
                   onClick={() => {
                     setFirstName("");
                     setLastName("");
@@ -194,11 +232,11 @@ const UpdateUser = ({ visible, handleCLick, data }) => {
                     setEmail("");
                     setStatus("active");
                     setRole("admin");
-                    
-                    handleCLick();
+
+                    handleDelete();
                   }}
                 >
-                  Cancel
+                  Delete User
                 </button>
               </div>
             </div>
