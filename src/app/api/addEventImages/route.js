@@ -3,12 +3,6 @@ import { NextResponse } from "next/server";
 
 import { writeFile,mkdir } from "fs/promises";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(req, res) {
   console.log("Entering addEvent route");
 

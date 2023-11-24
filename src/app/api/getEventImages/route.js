@@ -3,9 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
     // console.log("entering getAllEvents route");
-
-    
-
     const {eventId} = await req.json();
     connectSql();
     const query = `select * from images where Events_eventId = '${eventId}'`;
