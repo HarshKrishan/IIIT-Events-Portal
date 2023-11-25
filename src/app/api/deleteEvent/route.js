@@ -10,20 +10,34 @@ export async function POST(req) {
 
   const id = data.get("eventId");
   
-  connectSql();
-  const query = `DELETE FROM events WHERE eventId = '${id}';`;
 
-  const res = await connection
-    .promise()
-    .query(query)
-    .then(([data, fields]) => {
-      // console.log(data);
-      return data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  // local database
+  // connectSql();
+  // const query = `DELETE FROM events WHERE eventId = '${id}';`;
 
+  // const res = await connection
+  //   .promise()
+  //   .query(query)
+  //   .then(([data, fields]) => {
+  //     // console.log(data);
+  //     return data;
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
+  // vercel
+  const client = createClient()
+  await client.connect()
+
+  try {
+    const {res, fields} = await client.sql`DELETE FROM events WHERE eventId = ${id};`
+
+    return NextResponse.json({ result: res }, { status: 200 });
+  }
+  catch(e) {
+    console.log("error deleting event", e)
+  }
     
-  return NextResponse.json({ result: res }, { status: 200 });
+  return NextResponse.json({ result: "Error deleting event" }, { status: 500 });
 }
