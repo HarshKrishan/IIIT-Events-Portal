@@ -1,15 +1,14 @@
 import { revalidatePath } from "next/cache";
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
-
+import { createClient } from "@vercel/postgres";
 export async function POST(req) {
   console.log("Entering deleteEvent route");
 
   const data = await req.formData();
-//   console.log("data", data);
+  //   console.log("data", data);
 
   const id = data.get("eventId");
-  
 
   // local database
   // connectSql();
@@ -27,8 +26,8 @@ export async function POST(req) {
   //   });
 
   // vercel
-  const client = createClient()
-  await client.connect()
+  const client = createClient();
+  await client.connect();
 
   try {
     const { res, fields } =
@@ -40,6 +39,6 @@ export async function POST(req) {
   } finally {
     await client.end();
   }
-    
+
   return NextResponse.json({ result: "Error deleting event" }, { status: 500 });
 }
