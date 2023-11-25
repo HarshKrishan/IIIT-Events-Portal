@@ -38,7 +38,14 @@ function Page() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/getAllEvents")
+    //for local
+    // fetch("http://localhost:3000/api/getAllEvents")
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     setEvents(json.result);
+    //   });
+    //for vercel
+    fetch("https://iiit-events-portal.vercel.app/api/getAllEvents")
       .then((res) => res.json())
       .then((json) => {
         setEvents(json.result);

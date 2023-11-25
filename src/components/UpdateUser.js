@@ -81,8 +81,27 @@ const UpdateUser = ({ visible, handleCLick, data }) => {
     const formdata = new FormData();
 
     formdata.append("email", email);
-    
-    fetch("http://localhost:3000/api/deleteUser", {
+    //for local
+    // fetch("http://localhost:3000/api/deleteUser", {
+    //   method: "POST",
+    //   body: formdata,
+      
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     setFirstName("");
+    //     setLastName("");
+    //     setPassword("");
+    //     setEmail("");
+    //     setStatus("active");
+    //     setRole("admin");
+    //     handleCLick();
+    //   })
+    //   .then((json) => console.log(json));
+
+    //for vercel
+
+    fetch("https://iiit-events-portal.vercel.app/api/deleteUser", {
       method: "POST",
       body: formdata,
       

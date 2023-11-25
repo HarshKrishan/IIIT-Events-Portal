@@ -50,7 +50,22 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
   }
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/getEventImages", {
+
+    //for local
+    // fetch("http://localhost:3000/api/getEventImages", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     eventId: data.eventId,
+    //   }),
+    // })
+    //   .then(async (response) => await  response.json())
+    //   .then((json) => {
+    //     console.log(json);
+    //     setUploadedImages(json);
+    //   });
+
+    //for vercel
+    fetch("https://iiit-events-portal.vercel.app/api/getEventImages", {
       method: "POST",
       body: JSON.stringify({
         eventId: data.eventId,

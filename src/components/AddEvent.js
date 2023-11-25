@@ -33,15 +33,25 @@ const AddEvent = ({ visible, handleCLick }) => {
     for (let i = 0; i < event.image.length; i++) {
       formdata.append("image[]", event.image[i]);
     }
-   
-    fetch("http://localhost:3000/api/addEvent", {
+    //for local
+    // fetch("http://localhost:3000/api/addEvent", {
+    //   method: "POST",
+    //   body: formdata,
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .then((json) => console.log(json)); 
+    //for vercel
+    fetch("https://iiit-events-portal.vercel.app/api/addEvent", {
       method: "POST",
       body: formdata,
     })
       .then((response) => {
         console.log(response);
       })
-      .then((json) => console.log(json)); 
+      .then((json) => console.log(json));
+        
     
     setEvent({
       name: "",

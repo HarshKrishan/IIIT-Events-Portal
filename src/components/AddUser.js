@@ -34,7 +34,32 @@ const AddUser = ({ visible, handleCLick }) => {
       alert("Please fill all the fields");
       return;
     }
-    fetch("http://localhost:3000/api/addUser", {
+
+    //for local
+    // fetch("http://localhost:3000/api/addUser", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     handleCLick();
+    //     setFirstName("");
+    //     setLastName("");
+    //     setPassword("");
+    //     setEmail("");
+    //     setStatus("active");
+    //     setRole("admin");
+
+    //   })
+    //   .then((json) => console.log(json));
+
+
+    //for vercel
+
+    fetch("https://iiit-events-portal.vercel.app/api/addUser", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

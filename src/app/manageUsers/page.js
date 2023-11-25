@@ -38,13 +38,24 @@ function Page() {
   const [data,setData] = useState([]);
   
   useEffect(()=>{
-    fetch('http://localhost:3000/api/getAllUsers')
+    //for local
+    // fetch('http://localhost:3000/api/getAllUsers')
+    // .then(res => res.json())
+    //     .then(json =>
+          
+    //       // console.log(json),
+    //       setData(json.result)
+    //     )
+
+    //for vercel
+    fetch('https://iiit-events-portal.vercel.app/api/getAllUsers')
     .then(res => res.json())
         .then(json =>
           
           // console.log(json),
           setData(json.result)
         )
+        
   },[visible]);
   
 
@@ -96,7 +107,7 @@ function Page() {
                     email={user.emailid}
                     status={user.status}
         
-        
+
                     markUpdateUserVisibleTrue={markUpdateUserVisibleTrue}
                     
                   />
