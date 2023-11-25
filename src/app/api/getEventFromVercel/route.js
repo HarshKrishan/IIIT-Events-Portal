@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@vercel/postgres";
 export async function GET(req) {
-  // console.log("entering getAllUsers route");
-//   const client = connectVercelDb();
     const client = createClient();
     await client.connect();
   try{
