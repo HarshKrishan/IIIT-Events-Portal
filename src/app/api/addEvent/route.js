@@ -39,7 +39,7 @@ export async function POST(req) {
   await client.connect();
 
   try {
-    const { rows, fields } = await client.sql`INSERT INTO events (eName, eDate, eOrgEmail, fundedBy, fund, links, imageURI, Users_emailId) VALUES (${name}, ${date}, ${organiser}, ${fundedBy}, ${fund}, ${link}, ${name}, ${organiser})`;
+    const { rows, fields } = await client.sql`INSERT INTO events (ename, edate, eorgemail, fundedBy, fund, links, imageuri, users_emailid) VALUES (${name}, ${date}, ${organiser}, ${fundedBy}, ${fund}, ${link}, ${name}, ${organiser})`;
     return NextResponse.json({ result: rows.result }, { status: 200 });
 
   }
