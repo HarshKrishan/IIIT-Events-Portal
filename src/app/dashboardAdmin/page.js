@@ -63,7 +63,7 @@ function Page() {
           <div className="flex justify-between">
             <h1 className="text-xl font-bold">Events</h1>
             <button
-              className="bg-teal-400 rounded-md p-1 hover:bg-teal-500"
+              className="bg-teal-400 rounded-md p-2 hover:bg-teal-500"
               onClick={() => {
                 setVisible(true);
               }}

@@ -32,7 +32,7 @@ export async function POST(req) {
 
   try {
     const { res, fields } =
-      await client.sql`DELETE FROM events WHERE eventId = ${id};`;
+      await client.sql`DELETE FROM events WHERE eventid = ${id};`;
 
     return NextResponse.json({ result: res }, { status: 200 });
   } catch (e) {

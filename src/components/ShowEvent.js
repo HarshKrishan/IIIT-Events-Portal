@@ -65,6 +65,8 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
     //   });
 
     //for vercel
+
+    if(visible){
     fetch("https://iiit-events-portal.vercel.app/api/getEventImages", {
       method: "POST",
       body: JSON.stringify({
@@ -76,6 +78,7 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
         console.log(json);
         setUploadedImages(json);
       });
+    }
   }, [visible]);
 
 
@@ -153,7 +156,7 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
           </div>
           <div className="flex justify-center items-center mt-5">
             <button
-              className="bg-red-400 rounded-md p-1 hover:bg-red-500"
+              className="bg-red-400 rounded-md p-2 hover:bg-red-500"
               onClick={() => {
                 handleDelete();
               }}

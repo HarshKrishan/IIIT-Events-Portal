@@ -137,8 +137,8 @@ const AddUser = ({ visible, handleCLick }) => {
 
               <input
                 className="m-2 rounded-md p-1 w-3/5"
-                type="email"
-                placeholder="xyz@gmail.com"
+                type="password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);

@@ -83,7 +83,7 @@ export async function POST(req, res) {
       // Write the file
       await writeFile(path, buffer);
       const { rows, fields } =
-        await client.sql`INSERT INTO images (imageId, imageData, Events_eventId) VALUES (${currtime}, load_file(${path}), ${parseInt(
+        await client.sql`INSERT INTO images (imageId, imagedata, events_eventid) VALUES (${currtime}, load_file(${path}), ${parseInt(
           data.get("eventId")
         )})`;
     }

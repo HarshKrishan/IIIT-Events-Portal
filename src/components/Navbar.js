@@ -19,7 +19,7 @@ function TopNavbar({ children }) {
             show ? "w-60 flex-col bg-slate-600" : "w-20 flex-col bg-slate-600"
           }
         >
-          <div className="bg-blue-300 h-20 p-3 border-white border-b-2 border-r-2">
+          <div className="bg-teal-500 h-20 p-3 border-white border-b-2 border-r-2">
             <h1 className="text-2xl font-bold  mb-20 text-white">{logo}</h1>
           </div>
           <div className="p-3">
@@ -99,7 +99,7 @@ function TopNavbar({ children }) {
           </div>
         </div>
         <div className="w-screen">
-          <div className="flex justify-between p-5 h-20 bg-blue-300">
+          <div className="flex justify-between p-5 h-20 bg-teal-500">
             <button
               onClick={() => {
                 setShow(!show);

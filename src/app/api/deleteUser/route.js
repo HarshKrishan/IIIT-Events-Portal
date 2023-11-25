@@ -35,7 +35,7 @@ export async function POST(req) {
 
   try {
     const { res, fields } =
-      await client.sql`DELETE FROM users WHERE emailId = ${email};`;
+      await client.sql`DELETE FROM users WHERE emailid = ${email};`;
 
     return NextResponse.json({ result: res }, { status: 200 });
   } catch (e) {

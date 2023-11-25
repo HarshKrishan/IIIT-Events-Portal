@@ -41,7 +41,7 @@ export default function Home() {
             type="password"
             placeholder="Password"
           />
-          <div className="flex justify-between w-3/5 my-3">
+          <div className="flex justify-center w-3/5 my-3">
             
               <button
                 // href="/dashboardAdmin"
@@ -50,12 +50,8 @@ export default function Home() {
               >
                 Login
               </button>
-            
-            <button className="text-black bg-teal-400 rounded-md p-1 w-1/3">
-              SignUp
-            </button>
           </div>
-          <div className="w-3/5">
+          <div className="w-3/5 flex justify-center">
             <button className="text-teal-400">Forgot Password?</button>
           </div>
         </div>

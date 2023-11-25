@@ -40,7 +40,7 @@ export async function POST(req) {
 
   try {
     const { rows, fields } = await client.sql`INSERT INTO events (ename, edate, eorgemail, fundedBy, fund, links, imageuri, users_emailid) VALUES (${name}, ${date}, ${organiser}, ${fundedBy}, ${fund}, ${link}, ${name}, ${organiser})`;
-    return NextResponse.json({ result: rows.result }, { status: 200 });
+    return NextResponse.json({ result: rows }, { status: 200 });
 
   }
   catch (error) {
@@ -50,5 +50,5 @@ export async function POST(req) {
   }
 
   
-  return NextResponse.json({ result: res }, { status: 200 });
+  return NextResponse.json({ result: "Error occured while adding event" }, { status: 200 });
 }
