@@ -45,7 +45,9 @@ function Page() {
     //     setEvents(json.result);
     //   });
     //for vercel
-    fetch("https://iiit-events-portal.vercel.app/api/getAllEvents")
+    fetch("https://iiit-events-portal.vercel.app/api/getAllEvents", {
+      cache: "no-store",
+    })
       .then((res) => res.json())
       .then((json) => {
         setEvents(json.result);
