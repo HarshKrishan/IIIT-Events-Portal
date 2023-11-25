@@ -3,12 +3,6 @@ import { useRouter } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react'
 
-
- export const config = {
-   api: {
-     bodyParser: false,
-   },
- }; 
 const AddEvent = ({ visible, handleCLick }) => {
   const router = useRouter();
 

@@ -1,6 +1,6 @@
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
-
+import { createClient } from "@vercel/postgres";
 export async function GET(req) {
     console.log("entering getAllEvents route");
 
