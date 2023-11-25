@@ -67,7 +67,7 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
     //for vercel
 
     if(visible){
-    fetch("https://iiit-events-portal.vercel.app/api/getEventImages", {
+    fetch("https://iiit-events-portal.vercel.app/api/getEventImages",{
       method: "POST",
       body: JSON.stringify({
         eventId: data.eventId,

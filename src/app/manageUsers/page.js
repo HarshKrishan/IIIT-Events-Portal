@@ -51,7 +51,7 @@ function Page() {
 
     //for vercel
     fetch("https://iiit-events-portal.vercel.app/api/getAllUsers", {
-      cache: "no-store",
+      cache: "no-cache",
     })
       .then((res) => res.json())
       .then((json) =>
