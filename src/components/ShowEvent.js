@@ -3,15 +3,11 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 
 import { useState } from "react";
-const ShowEvent = ({ visible, handleCLick ,data}) => {
+const ShowEvent = ({ visible, handleCLick, data }) => {
   // bg-black  bg-opacity-20 backdrop-blur-sm
-  const[images,setImages] = useState([]);
+  const [images, setImages] = useState([]);
 
   const [uploadedImages, setUploadedImages] = useState([]);
-
-  
-
-  
 
   const handleSubmit = () => {
     const formdata = new FormData();
@@ -19,7 +15,7 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
       formdata.append("image[]", images[i]);
     }
     formdata.append("eventId", data.eventId);
-    console.log("data_id",data.eventId);
+    console.log("data_id", data.eventId);
     formdata.append("eventName", data.name);
     fetch("http://localhost:3000/api/addEventImages", {
       method: "POST",
@@ -29,7 +25,7 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
         console.log(response);
       })
       .then((json) => console.log(json));
-  }
+  };
 
   const handleDelete = () => {
     const formdata = new FormData();
@@ -46,11 +42,9 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
       .then((json) => console.log(json));
 
     handleCLick();
-    
-  }
+  };
 
   useEffect(() => {
-
     //for local
     // fetch("http://localhost:3000/api/getEventImages", {
     //   method: "POST",
@@ -66,24 +60,45 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
 
     //for vercel
 
-    if(visible){
-    fetch("https://iiit-events-portal.vercel.app/api/getEventImages", {
-      method: "POST",
-      body: JSON.stringify({
-        eventId: data.eventId,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then(async (response) => await response.json())
-      .then((json) => {
-        console.log(json);
-        setUploadedImages(json);
-      });
+    if (visible) {
+      // fetch("https://iiit-events-portal.vercel.app/api/getEventImages", {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     eventId: data.eventId,
+      //   }),
+      //   headers: {
+      //     "Content-type": "application/json; charset=UTF-8",
+      //   },
+      // })
+      //   .then(async (response) => await response.json())
+      //   .then((json) => {
+      //     console.log(json);
+      //     setUploadedImages(json);
+      //   });
+      fetch("https://iiit-events-portal.vercel.app/api/getEventImages", {
+        method: "POST",
+        body: JSON.stringify({
+          eventId: data.eventId,
+        }),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((json) => {
+          console.log(json);
+          setUploadedImages(json);
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+        });
     }
   }, [visible]);
-
 
   if (!visible) return null;
   return (
@@ -141,20 +156,18 @@ const ShowEvent = ({ visible, handleCLick ,data}) => {
             </ul>
             <div className="flex gap-x-2 items-center mt-5">
               <h1 className=" font-bold text-xl">Event Images</h1>
-              
-               
-                <input
-                  className="m-2 rounded-md p-1 w-3/5"
-                  type="file"
-                  id="uploadFile"
-                  placeholder="Event Image"
-                  multiple={true}
-                  onChange={async (e) => {
-                    setImages(e.target.files );
-                    await handleSubmit();
-                  }}
-                />
-              
+
+              <input
+                className="m-2 rounded-md p-1 w-3/5"
+                type="file"
+                id="uploadFile"
+                placeholder="Event Image"
+                multiple={true}
+                onChange={async (e) => {
+                  setImages(e.target.files);
+                  await handleSubmit();
+                }}
+              />
             </div>
           </div>
           <div className="flex justify-center items-center mt-5">
