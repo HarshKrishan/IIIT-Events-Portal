@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setRole } from '@/store/slices/userSlice';
 import {useRouter} from 'next/navigation';
 import { useState } from 'react';
+import connectVercelDb from './api/connectVercelDb/route';
 // import connectSql from './api/connectDb/router';
 export default function Home() {
   const dispatch = useDispatch();
