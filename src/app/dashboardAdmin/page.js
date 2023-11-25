@@ -45,7 +45,7 @@ function Page() {
       });
   },[visible]);
 
-  // console.log("events",events);
+  console.log("events",events);
 
   return (
     <div>
@@ -80,20 +80,55 @@ function Page() {
                 {events.map((event, index) => (
                   
                   <EventTableRow
-                    key={event.eventId}
-                    eventId={event.eventId}
-                    id={index + 1}
-                    name={event.eName}
-                    date={(()=>{
-                      const date = new Date(event.eDate);
-                      return date.toISOString().split('T')[0];
-                    })()}
-                    organiser={event.eOrgEmail}
-                    fundedBy = {event.fundedBy}
-                    fund = {event.fund}
-                    link={event.links}
+                  //for local sql
+                    // key={event.eventId}
+                    // eventId={event.eventId}
+                    // id={index + 1}
+                    // name={event.eName}
+                    // date={(()=>{
+                      
+                    //   const date = new Date(event.eDate);
+
+                    
+                    // return date.toISOString().split('T')[0];
+                    // })()}
+                    // organiser={event.eOrgEmail}
+                    // fundedBy = {event.fundedBy}
+                    // fund = {event.fund}
+                    // link={event.links}
                     markShowEventTrue={markShowEventTrue}
                     setEventDataToShow={setEventDataToShow}
+
+
+                    //for vercel sql
+                    key={event.eventid}
+                    eventId={event.eventid}
+                    id={index + 1}
+                    name={event.ename}
+                    date={(()=>{
+                      
+                      const date = new Date(event.edate);
+                      
+                      const year = date.getFullYear();
+                      const month = date.toLocaleString("en-US", {
+                        month: "long",
+                      });
+                      const day = date.getDate();
+                      const hours = date.getHours();
+                      const minutes = date.getMinutes();
+                      const seconds = date.getSeconds();
+
+                      
+                      const formattedDate = `${month} ${day}, ${year}`;
+
+                      return formattedDate;
+                    })()}
+                    organiser={event.eorgemail}
+                    fundedBy = {event.fundedby}
+                    fund = {event.fund}
+                    link={event.links}
+
+
                   />
                 ))}
               </tbody>

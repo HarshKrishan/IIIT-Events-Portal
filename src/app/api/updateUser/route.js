@@ -43,12 +43,14 @@ export async function POST(req) {
   await client.connect();
 
   try {
-    const { res, fields } = await client.sql`update users set fName=${firstName},lName = ${lastName}, pwd=${password},role= ${role},status=${status} where emailId=${email}`;
+    const { res, fields } =
+      await client.sql`update users set fName=${firstName},lName = ${lastName}, pwd=${password},role= ${role},status=${status} where emailId=${email}`;
 
     return NextResponse.json({ result: res }, { status: 200 });
-  }
-  catch (e) {
+  } catch (e) {
     console.log("error updating user", e);
+  } finally {
+    await client.end();
   }
 
   return NextResponse.json({ result: "Error updating User..." }, { status: 500 });

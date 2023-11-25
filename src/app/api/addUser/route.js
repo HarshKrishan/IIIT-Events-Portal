@@ -33,12 +33,14 @@ export async function POST(req) {
   await client.connect();
 
   try {
-    const {res, fields} = await client.sql`INSERT INTO users (fName,lname,pwd, role, emailId, status) VALUES (${firstName},${lastName},${password}, ${role}, ${email}, ${status})`;
+    const { res, fields } =
+      await client.sql`INSERT INTO users (fName,lname,pwd, role, emailId, status) VALUES (${firstName},${lastName},${password}, ${role}, ${email}, ${status})`;
 
     return NextResponse.json({ result: res }, { status: 200 });
-  }
-  catch(e) {
+  } catch (e) {
     console.log("error adding user", e);
+  } finally {
+    await client.end();
   }
   
   return NextResponse.json({ result: "Error adding User..." }, { status: 500 });

@@ -34,12 +34,14 @@ export async function POST(req) {
   await client.connect();
 
   try {
-    const { res, fields } = await client.sql`DELETE FROM users WHERE emailId = ${email};`;
+    const { res, fields } =
+      await client.sql`DELETE FROM users WHERE emailId = ${email};`;
 
     return NextResponse.json({ result: res }, { status: 200 });
-  }
-  catch (e) {
-    console.log(e)
+  } catch (e) {
+    console.log(e);
+  } finally {
+    await client.end();
   }
 
   return NextResponse.json({ result: "Error deleting user..." }, { status: 200 });

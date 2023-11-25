@@ -32,6 +32,9 @@ export async function GET(req) {
     } catch (error) {
         console.log("error connecting sql", error)
     }
+    finally {
+        await client.end();
+    }
 
     return NextResponse.json({ result: "Error getting events" }, { status: 200 });
 }

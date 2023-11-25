@@ -80,11 +80,23 @@ function Page() {
                   <UserTableRow
                     key={index + 1}
                     id={index + 1}
-                    name={user.fName}
-                    lname={user.lName}
+
+                    //for local sql
+                    // name={user.fName}
+                    // lname={user.lName}
+                    // role={user.role}
+                    // email={user.emailId}
+                    // status={user.status}
+
+
+                    //for vercel sql
+                    name={user.fname}
+                    lname={user.lname}
                     role={user.role}
-                    email={user.emailId}
+                    email={user.emailid}
                     status={user.status}
+        
+        
                     markUpdateUserVisibleTrue={markUpdateUserVisibleTrue}
                     
                   />

@@ -82,13 +82,21 @@ export async function POST(req, res) {
 
       // Write the file
       await writeFile(path, buffer);
-      const { rows, fields } = await client.sql`INSERT INTO images (imageId, imageData, Events_eventId) VALUES (${currtime}, load_file(${path}), ${parseInt(data.get("eventId"))})`;
+      const { rows, fields } =
+        await client.sql`INSERT INTO images (imageId, imageData, Events_eventId) VALUES (${currtime}, load_file(${path}), ${parseInt(
+          data.get("eventId")
+        )})`;
     }
-    
-    return NextResponse.json({ result: "successfuly uploaded images" }, { status: 200 });
 
+    return NextResponse.json(
+      { result: "successfuly uploaded images" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log("error connecting sql", error);
+  } finally {
+    await client.end();
   }
-  catch (error) {
-    console.log("error connecting sql", error)
-  }
+
+  return NextResponse.json({ result: "Error uploading images" }, { status: 200 });
 }

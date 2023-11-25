@@ -31,12 +31,14 @@ export async function POST(req) {
   await client.connect()
 
   try {
-    const {res, fields} = await client.sql`DELETE FROM events WHERE eventId = ${id};`
+    const { res, fields } =
+      await client.sql`DELETE FROM events WHERE eventId = ${id};`;
 
     return NextResponse.json({ result: res }, { status: 200 });
-  }
-  catch(e) {
-    console.log("error deleting event", e)
+  } catch (e) {
+    console.log("error deleting event", e);
+  } finally {
+    await client.end();
   }
     
   return NextResponse.json({ result: "Error deleting event" }, { status: 500 });
