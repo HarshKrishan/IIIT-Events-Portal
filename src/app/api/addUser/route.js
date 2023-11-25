@@ -11,7 +11,7 @@ export async function POST(req) {
 
 
   //for local sql
-  // console.log("Got this....",firstName,lastName,password, role, email, status);
+  console.log("Got this....",firstName,lastName,password, role, email, status);
   // connectSql();
   //   const query = `INSERT INTO users (fName,lname,pwd, role, emailId, status) VALUES ('${firstName}','${lastName}','${password}', '${role}', '${email}', '${status}')`;
   // const res = await connection
@@ -34,9 +34,9 @@ export async function POST(req) {
 
   try {
     const { res, fields } =
-      await client.sql`INSERT INTO users (fName,lname,pwd, role, emailId, status) VALUES (${firstName},${lastName},${password}, ${role}, ${email}, ${status})`;
+      await client.sql`INSERT INTO users (fname,lname,pwd, role, emailid, status) VALUES (${firstName},${lastName},${password}, ${role}, ${email}, ${status})`;
 
-    return NextResponse.json({ result: res }, { status: 200 });
+    return NextResponse.json({ result: "Successfully added User" }, { status: 200 });
   } catch (e) {
     console.log("error adding user", e);
   } finally {

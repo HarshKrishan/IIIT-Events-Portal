@@ -1,11 +1,9 @@
-"use client"
-import TopNavbar from '@/components/Navbar'
-import React,{useState,useEffect} from 'react'
-import AddUser from '@/components/AddUser'
-import UserTableRow from '@/components/UserTableRow'
-import UpdateUser from '@/components/UpdateUser'
-
-
+"use client";
+import TopNavbar from "@/components/Navbar";
+import React, { useState, useEffect } from "react";
+import AddUser from "@/components/AddUser";
+import UserTableRow from "@/components/UserTableRow";
+import UpdateUser from "@/components/UpdateUser";
 
 function Page() {
   const [visible, setVisible] = useState(false);
@@ -21,43 +19,46 @@ function Page() {
 
   const handleCLick = () => {
     setVisible(false);
-
   };
 
   const [updateUserVisible, setUpdateUserVisible] = useState(false);
   const handleUpdateUserCLick = () => {
-
     setUpdateUserVisible(false);
   };
 
   const markUpdateUserVisibleTrue = ({ name, lname, role, email, status }) => {
-    setUserDataToShow({ fName: name, lName: lname, role: role, emailId: email, status: status });
+    setUserDataToShow({
+      fName: name,
+      lName: lname,
+      role: role,
+      emailId: email,
+      status: status,
+    });
     setUpdateUserVisible(true);
   };
 
-  const [data,setData] = useState([]);
-  
-  useEffect(()=>{
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
     //for local
     // fetch('http://localhost:3000/api/getAllUsers')
     // .then(res => res.json())
     //     .then(json =>
-          
+
     //       // console.log(json),
     //       setData(json.result)
     //     )
 
     //for vercel
-    fetch('https://iiit-events-portal.vercel.app/api/getAllUsers')
-    .then(res => res.json())
-        .then(json =>
-          
-          // console.log(json),
-          setData(json.result)
-        )
-        
-  },[visible]);
-  
+    fetch("https://iiit-events-portal.vercel.app/api/getAllUsers", {
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .then((json) =>
+        // console.log(json),
+        setData(json.result)
+      );
+  }, [visible]);
 
   return (
     <div>
@@ -91,7 +92,6 @@ function Page() {
                   <UserTableRow
                     key={index + 1}
                     id={index + 1}
-
                     //for local sql
                     // name={user.fName}
                     // lname={user.lName}
@@ -99,17 +99,13 @@ function Page() {
                     // email={user.emailId}
                     // status={user.status}
 
-
                     //for vercel sql
                     name={user.fname}
                     lname={user.lname}
                     role={user.role}
                     email={user.emailid}
                     status={user.status}
-        
-
                     markUpdateUserVisibleTrue={markUpdateUserVisibleTrue}
-                    
                   />
                 ))}
               </tbody>
@@ -117,10 +113,14 @@ function Page() {
           </div>
         </div>
         <AddUser visible={visible} handleCLick={handleCLick} />
-        <UpdateUser visible={updateUserVisible} handleCLick={handleUpdateUserCLick} data={userDataToShow}/>
+        <UpdateUser
+          visible={updateUserVisible}
+          handleCLick={handleUpdateUserCLick}
+          data={userDataToShow}
+        />
       </TopNavbar>
     </div>
   );
 }
 
-export default Page
+export default Page;
