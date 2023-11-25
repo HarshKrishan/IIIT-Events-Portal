@@ -1,11 +1,11 @@
 "use client";
 import React,{useState} from 'react'
 import Image from 'next/image';
-import UpdateUser from './UpdateUser';
+
 function UserTableRow(props) {
   const { id, name,lname, role, email, status } = props;
-  const oddClass = "border-r-4 border-slate-300 ";
-  const evenClass = "border-r-4 border-slate-300 bg-teal-300 ";
+  const oddClass = "border-r-4 border-b-2 border-slate-300 ";
+  const evenClass = "border-r-4 border-b-2 border-slate-300 bg-teal-300 ";
   const [show, setShow] = useState(false);
   const handleCLick = () => {
     alert("hi!")
