@@ -3,6 +3,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from '@vercel/postgres'
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req) {
   console.log("entering addUser route");
   // console.log(req);
