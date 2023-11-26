@@ -53,6 +53,6 @@ export async function POST(req) {
   } finally {
     await client.end();
   }
-  revalidatePath("https://iiit-events-portal.vercel.app/api/getAllUsers");
+  revalidatePath("https://iiit-events-portal.vercel.app/manageUsers");
   return NextResponse.json({ result: "Error adding User..." }, { status: 500 });
 }
