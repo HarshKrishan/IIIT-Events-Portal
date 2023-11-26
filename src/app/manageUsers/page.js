@@ -76,7 +76,7 @@ function Page() {
               Add User
             </button>
           </div>
-          <div className="mt-20 w-full flex justify-center ">
+          <div className="mt-20 w-full flex justify-center overflow-y-auto">
             <table className="table-auto border-4 border-slate-300 w-full">
               <thead>
                 <tr>
