@@ -54,7 +54,7 @@ function Page() {
       });
   },[visible]);
 
-  console.log("events",events);
+  // console.log("events",events);
 
   return (
     <div>

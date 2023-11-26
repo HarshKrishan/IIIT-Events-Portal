@@ -1,14 +1,40 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { getSession, signOut} from "next-auth/react";
+
 function TopNavbar({ children }) {
   const [show, setShow] = useState(false);
-  const [logo, setLogo] = useState("IIITD");
+  const [logo, setLogo] = useState("");
   
   const user = useSelector((state) => state.user);
-
+  const [currentUser,setCurrentUser] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    role: "",
+    status: ""
+  })
+  const session = async ()=>{
+    const curr = await getSession();
+    // console.log(curr);
+    const {fname,lname,email,role,status} = curr.user;
+    setCurrentUser({
+      fname: fname,
+      lname: lname,
+      email: email,
+      role: role,
+      status: status
+    })
+  }
+  // console.log(currentUser)
+  // console.log(session);
+  useEffect(()=>{
+    session();
+  },[])
+  
   return (
     <div className="h-screen">
       {" "}
@@ -20,33 +46,34 @@ function TopNavbar({ children }) {
           }
         >
           <div className="bg-teal-500 h-20 p-3 border-white border-b-2 border-r-2">
-            <h1 className="text-2xl font-bold  mb-20 text-white">{logo}</h1>
+            <h1 className="text-2xl font-bold  text-white">IIITD</h1>
+            <h1 className="text-2xl mb-2 text-white">{logo}</h1>
           </div>
           <div className="p-3">
             {" "}
             {/*added h-full here earlier it was h-screen*/}
-            <div className="flex">
+            <div className="flex justify-start">
               <Image
                 className="mt-3 mb-10 ml-1"
                 src="https://img.icons8.com/ios/50/user-male-circle--v1.png"
-                width={40}
-                height={40}
+                width={38}
+                height={38}
                 alt="user"
               />
               <h1 className="mt-5 ml-4 font-bold text-xl text-white">
-                {show ? (user.role==="admin"? "Admin":"Co-Admin") : ""}
+                {show ? (currentUser.role === "admin" ? "Admin" : "Co-Admin") : ""}
               </h1>
             </div>
             <Link
-              className={`flex overflow-hidden mb-10 hover:shadow-md hover:bg-slate-700 `}
+              className={`flex justify-start overflow-hidden mb-10 hover:shadow-md hover:bg-slate-700 `}
               href="/dashboardAdmin"
             >
               {/* <div className="flex overflow-hidden mb-10 hover:shadow-md hover:bg-slate-700"> */}
               <Image
                 className=" ml-3 py-2 flex-2"
                 src="https://img.icons8.com/external-kmg-design-basic-outline-kmg-design/32/external-dashboard-ui-essential-kmg-design-basic-outline-kmg-design.png"
-                width={42}
-                height={42}
+                width={28}
+                height={28}
                 alt="dashboard"
                 layout="fixed"
               />
@@ -55,8 +82,8 @@ function TopNavbar({ children }) {
               </h2>
               {/* </div> */}
             </Link>
-            <div className="flex flex-col justify-between">
-              {user.role != "admin" ? null : (
+            <div className="flex flex-col justify-start">
+              {currentUser.role != "admin" ? null : (
                 <div>
                   <Link
                     href="/manageUsers"
@@ -66,8 +93,8 @@ function TopNavbar({ children }) {
                     <Image
                       className=" mr-2"
                       src="https://img.icons8.com/pastel-glyph/64/user-settings.png"
-                      width={54}
-                      height={54}
+                      width={48}
+                      height={30}
                       alt="employee"
                       layout="fixed"
                     />
@@ -80,7 +107,11 @@ function TopNavbar({ children }) {
               )}
 
               <div>
-                <Link href={"/"} className="">
+                <button onClick={()=>{
+                  
+                  signOut({callbackUrl: 'http://localhost:3000/login'});
+                  
+                }} className="">
                   <div className="bottom-0 absolute mb-10 ml-1 flex overflow-hidden hover:shadow-md hover:bg-slate-700 ">
                     {/* <div className="flex overflow-hidden hover:shadow-md hover:bg-slate-700"> */}
                     <Image
@@ -93,7 +124,7 @@ function TopNavbar({ children }) {
                       {show ? "Log out" : " "}
                     </h2>
                   </div>
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -104,9 +135,9 @@ function TopNavbar({ children }) {
               onClick={() => {
                 setShow(!show);
                 if (show) {
-                  setLogo("IIITD");
+                  setLogo("");
                 } else {
-                  setLogo("IIITD Events Portal");
+                  setLogo("Events Portal");
                 }
               }}
             >
@@ -125,8 +156,10 @@ function TopNavbar({ children }) {
                 height={20}
                 alt="user"
               />
-              {user.role==="admin"?<h1 className="text-xl">Welcome Admin</h1>:<h1 className="text-xl">Welcome Co-Admin</h1>}
-              {/* <h1 className="text-xl">Welcome Admin</h1> */}
+              
+                <h1 className="text-xl">{currentUser.fname+" "+currentUser.lname}</h1>
+              
+             
             </div>
           </div>
           <div className="">{children}</div>

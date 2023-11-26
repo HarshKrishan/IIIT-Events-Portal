@@ -23,9 +23,9 @@ import mysql from 'mysql2';
 
 // connection.connect(function(err) {
 //     if (err) throw err;
-//     console.log("Connected!");
+//     // console.log("Connected!");
 // });
-const connectSql = null;
-const connection = null;
+const connectSql = null;    //uncomment these lines
+const connection = null;    //uncomment these lines
 export default connectSql;
 export {connection};
