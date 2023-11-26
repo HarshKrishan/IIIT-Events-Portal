@@ -5,6 +5,8 @@ import AddUser from "@/components/AddUser";
 import UserTableRow from "@/components/UserTableRow";
 import UpdateUser from "@/components/UpdateUser";
 
+
+
 function Page() {
   const [visible, setVisible] = useState(false);
 
@@ -52,7 +54,8 @@ function Page() {
     //for vercel
     fetch("https://iiit-events-portal.vercel.app/api/getAllUsers", {
       cache: "no-cache",
-      next: { revalidate: 0 }
+      next: { revalidate: 0 },
+      cache:"no-store",
     })
       .then((res) => res.json())
       .then((json) =>

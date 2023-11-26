@@ -5,7 +5,8 @@ import { createClient } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
-
+export const revalidate = 0;
+export const cache = "no-store";
 export async function POST(req) {
   console.log("entering addUser route");
   // console.log(req);
@@ -52,6 +53,6 @@ export async function POST(req) {
   } finally {
     await client.end();
   }
-  revalidatePath("/api/getAllUsers");
+  revalidatePath("https://iiit-events-portal.vercel.app/api/getAllUsers");
   return NextResponse.json({ result: "Error adding User..." }, { status: 500 });
 }
