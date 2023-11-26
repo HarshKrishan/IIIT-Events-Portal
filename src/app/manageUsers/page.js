@@ -6,6 +6,9 @@ import UserTableRow from "@/components/UserTableRow";
 import UpdateUser from "@/components/UpdateUser";
 
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const cache = "no-store";
 
 function Page() {
   const [visible, setVisible] = useState(false);
