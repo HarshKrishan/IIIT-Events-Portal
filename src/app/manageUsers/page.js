@@ -5,6 +5,7 @@ import AddUser from "@/components/AddUser";
 import UserTableRow from "@/components/UserTableRow";
 import UpdateUser from "@/components/UpdateUser";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
