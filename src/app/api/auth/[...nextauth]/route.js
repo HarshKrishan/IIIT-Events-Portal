@@ -65,7 +65,7 @@ const authOptions = {
           return null;
           
         } catch (error) {
-          console.log("authentication error")
+          console.log(error,"authentication error")
           return null;
         }
         
