@@ -17,7 +17,7 @@ function Page() {
 
     const handleLogin = async () => {
 
-      const response = signIn("credentials", {
+      const response = await signIn("credentials", {
         email: email,
         password: password,
         redirect: false,
@@ -29,6 +29,7 @@ function Page() {
           router.push("/dashboardAdmin");
         }
       });
+      console.log("login response",response);
     };
   return (
     <div>
