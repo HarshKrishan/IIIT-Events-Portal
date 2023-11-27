@@ -8,14 +8,11 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 function Page() {
   const [visible, setVisible] = useState(false);
-  const { status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/login");
-    },
-  });
 
-  
+  const { data: session, status } = useSession();
+
+  console.log("session in dashboard",data,status)
+
   const [visibleShowEvent, setVisibleShowEvent] = useState(false);
 
   const [eventDataToShow, setEventDataToShow] = useState({
@@ -61,6 +58,8 @@ function Page() {
       .then((json) => {
         setEvents(json.result);
       });
+
+
   },[visible]);
 
   // console.log("events",events);

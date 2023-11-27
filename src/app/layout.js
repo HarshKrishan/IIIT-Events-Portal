@@ -2,7 +2,7 @@
 import "./globals.css";
 import { Provider } from "react-redux";
 import store from "@/store/store";
-
+import { Providers } from "@/components/Provider";
 
 export default function RootLayout({ children }) {
   return (
@@ -14,9 +14,9 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <Provider store={store}>
-        {children}
-        </Provider>
+        <Providers>
+          <Provider store={store}>{children}</Provider>
+        </Providers>
       </body>
     </html>
   );
