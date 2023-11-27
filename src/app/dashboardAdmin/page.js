@@ -4,9 +4,13 @@ import TopNavbar from "@/components/Navbar";
 import React, { useState, useEffect } from "react";
 import EventTableRow from "@/components/EventTableRow";
 import ShowEvent from "@/components/ShowEvent";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/dist/server/api-utils";
 function Page() {
   const [visible, setVisible] = useState(false);
+  const session  = useSession();
 
+  
   const [visibleShowEvent, setVisibleShowEvent] = useState(false);
 
   const [eventDataToShow, setEventDataToShow] = useState({
@@ -36,7 +40,7 @@ function Page() {
   };
   
   const [events, setEvents] = useState([]);
-
+  
   useEffect(() => {
     //for local
     // fetch("http://localhost:3000/api/getAllEvents")
@@ -55,7 +59,10 @@ function Page() {
   },[visible]);
 
   // console.log("events",events);
-
+  if (!session) {
+    redirect("/login");
+    return null;
+  }
   return (
     <div>
       <TopNavbar>

@@ -1,12 +1,20 @@
 "use client"
 import React,{useState} from 'react'
-import { signIn} from "next-auth/react";
+import { signIn, useSession} from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 function Page() {
    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
+
+    const session = useSession();
+
+    if(session){
+      router.push("/dashboardAdmin");
+      return null;
+    }
+
     const handleLogin = async () => {
 
       const response = signIn("credentials", {

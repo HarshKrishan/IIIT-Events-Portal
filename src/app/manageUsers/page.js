@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import AddUser from "@/components/AddUser";
 import UserTableRow from "@/components/UserTableRow";
 import UpdateUser from "@/components/UpdateUser";
-
+import { useSession } from "next-auth/react";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -12,7 +12,7 @@ export const cache = "no-store";
 
 function Page() {
   const [visible, setVisible] = useState(false);
-
+  const session = useSession();
   const [userDataToShow, setUserDataToShow] = useState({
     fName: "",
     lName: "",
@@ -66,6 +66,11 @@ function Page() {
         setData(json.result)
       );
   }, [visible]);
+
+  if (!session) {
+    redirect("/login");
+    return null;
+  }
 
   return (
     <div>
