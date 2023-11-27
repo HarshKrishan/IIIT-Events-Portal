@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CrediantialsProvider from "next-auth/providers/credentials";
-import { sql } from "@vercel/postgres";
+import { createClient } from "@vercel/postgres";
 
 const authOptions = {
   session: {
@@ -47,9 +47,15 @@ const authOptions = {
         //for vercel sql
 
         try {
-          const response =
-            await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
-          const user = response[0];
+
+          const client = createClient();
+          await client.connect();
+
+          const {rows,fields} = await client.sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
+
+          // const response =
+          //   await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
+          const user = rows[0];
           console.log(user)
           if (user && user.pwd === credentials.password) {
             console.log("user found");
