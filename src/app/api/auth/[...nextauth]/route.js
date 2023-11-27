@@ -50,7 +50,7 @@ const authOptions = {
           const response =
             await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
           const user = response[0];
-          // console.log(user)
+          console.log(user)
           if (user && user.pwd === credentials.password) {
             console.log("user found");
 
