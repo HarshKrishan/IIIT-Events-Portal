@@ -16,7 +16,7 @@ const authOptions = {
       async authorize(credentials, req) {
 
         //for local sql
-        // console.log(credentials)
+        console.log(credentials)
         // connectSql();
         // const rows = await connection
         //   .promise()
