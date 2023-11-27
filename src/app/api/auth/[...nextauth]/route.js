@@ -51,7 +51,7 @@ const authOptions = {
           const client = createClient();
           await client.connect();
 
-          const {rows,fields} = await client.sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
+          const {rows,fields} = await client.sql`SELECT * FROM users WHERE emailid = '${credentials.email}';`;
 
           // const response =
           //   await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
