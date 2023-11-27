@@ -16,7 +16,7 @@ const authOptions = {
       async authorize(credentials, req) {
 
         //for local sql
-        console.log(credentials)
+        // console.log(credentials)
         // connectSql();
         // const rows = await connection
         //   .promise()
@@ -56,9 +56,9 @@ const authOptions = {
           // const response =
           //   await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
           const user = rows[0];
-          console.log(user)
+          // console.log(user)
           if (user && user.pwd === credentials.password) {
-            console.log("user found");
+            // console.log("user found");
 
             return {
               fname: user.fname,

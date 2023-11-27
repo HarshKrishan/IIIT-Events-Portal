@@ -21,6 +21,7 @@ function Page() {
         email: email,
         password: password,
         redirect: false,
+        callbackUrl: "/dashboardAdmin",
       }).then((res) => {
         console.log(res);
         if (res.error) {
