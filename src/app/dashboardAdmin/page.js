@@ -11,7 +11,7 @@ function Page() {
 
   const { data: session, status } = useSession();
 
-  console.log("session in dashboard",data,status)
+  console.log("session in dashboard",session,status)
 
   const [visibleShowEvent, setVisibleShowEvent] = useState(false);
 
