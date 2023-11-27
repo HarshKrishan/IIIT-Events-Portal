@@ -45,22 +45,30 @@ const authOptions = {
         // return null;
 
         //for vercel sql
-        const response =
-          await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
-        const user = response[0];
-        // console.log(user)
-        if (user && user.pwd === credentials.password) {
-          console.log("user found")
 
-          return {
-            fname: user.fname,
-            lname: user.lname,
-            email: user.emailid,
-            role: user.role,
-            status: user.status,
-          };
+        try {
+          const response =
+            await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
+          const user = response[0];
+          // console.log(user)
+          if (user && user.pwd === credentials.password) {
+            console.log("user found");
+
+            return {
+              fname: user.fname,
+              lname: user.lname,
+              email: user.emailid,
+              role: user.role,
+              status: user.status,
+            };
+          }
+          return null;
+          
+        } catch (error) {
+          console.log("authentication error")
+          return null;
         }
-        return null;
+        
       },
     }),
   ],
