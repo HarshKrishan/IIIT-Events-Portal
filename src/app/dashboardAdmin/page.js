@@ -9,9 +9,9 @@ import { redirect } from "next/navigation";
 function Page() {
   const [visible, setVisible] = useState(false);
 
-  const { data: session, status } = useSession();
+  const session = useSession();
 
-  console.log("session in dashboard",session,status)
+  console.log("session in dashboard",session)
 
   const [visibleShowEvent, setVisibleShowEvent] = useState(false);
 
