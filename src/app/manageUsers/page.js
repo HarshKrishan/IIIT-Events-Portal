@@ -14,6 +14,7 @@ export const cache = "no-store";
 function Page() {
   const [visible, setVisible] = useState(false);
   const session = useSession();
+  console.log("session in manageusers", session);
   const [userDataToShow, setUserDataToShow] = useState({
     fName: "",
     lName: "",
@@ -68,10 +69,10 @@ function Page() {
       );
   }, [visible]);
 
-  if (!session) {
-    redirect("/login");
-    return null;
-  }
+  // if (!session) {
+  //   redirect("/login");
+  //   return null;
+  // }
 
   return (
     <div>
