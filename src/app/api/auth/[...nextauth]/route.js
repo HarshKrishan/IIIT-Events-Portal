@@ -50,7 +50,7 @@ const authOptions = {
         const user = response[0];
         // console.log(user)
         if (user && user.pwd === credentials.password) {
-          // console.log("user found")
+          console.log("user found")
 
           return {
             fname: user.fname,
