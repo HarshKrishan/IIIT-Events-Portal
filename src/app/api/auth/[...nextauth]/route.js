@@ -46,7 +46,7 @@ const authOptions = {
 
         //for vercel sql
         const response =
-          await sql`SELECT * FROM users WHERE email = '${credentials.email}'`;
+          await sql`SELECT * FROM users WHERE emailid = '${credentials.email}'`;
         const user = response[0];
         // console.log(user)
         if (user && user.pwd === credentials.password) {
