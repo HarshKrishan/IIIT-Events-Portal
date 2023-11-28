@@ -101,6 +101,8 @@ const ShowEvent = ({ visible, handleCLick, data }) => {
   }, [visible]);
 
   if (!visible) return null;
+
+  console.log("uploadedImages", uploadedImages);
   return (
     <div className="fixed inset-x-72 inset-y-5 bg-slate-200">
       <div className=" flex justify-center items-center">

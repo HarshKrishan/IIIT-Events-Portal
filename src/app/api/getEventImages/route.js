@@ -1,6 +1,12 @@
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
 import { createClient } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const cache = "no-store";
+
 export async function POST(req) {
     // console.log("entering getAllEvents route");
 
@@ -30,7 +36,7 @@ export async function POST(req) {
     await client.connect();
 
     try {
-        const { rows, fields } = await client.sql`select * from images where Events_eventId = ${eventId};`;
+        const { rows, fields } = await client.sql`select * from images where events_eventid = ${eventId};`;
         return NextResponse.json({ result: rows }, { status: 200 });
 
     } catch (error) {
@@ -39,6 +45,6 @@ export async function POST(req) {
     finally {
         await client.end();
     }
-
+    revalidatePath("https://iiit-events-portal.vercel.app/dashboardAdmin")
     return NextResponse.json({ result: "Error getting images" }, { status: 200 });
 }
