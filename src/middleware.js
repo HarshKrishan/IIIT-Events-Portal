@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 
 export function middleware(request) {
-    if(request.nextUrl.pathname==='/api/getAllEvents'){
+    if(request.nextUrl.pathname==='/api/getAllEvents' || request.nextUrl.pathname.startsWith('/api/auth/')){
         return NextResponse.next();
     }
   return NextResponse.redirect(new URL("/login", request.url));
