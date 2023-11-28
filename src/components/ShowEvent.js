@@ -17,7 +17,7 @@ const ShowEvent = ({ visible, handleCLick, data }) => {
     formdata.append("eventId", data.eventId);
     console.log("data_id", data.eventId);
     formdata.append("eventName", data.name);
-    fetch("http://localhost:3000/api/addEventImages", {
+    fetch("https://iiit-events-portal.vercel.app/api/addEventImages", {
       method: "POST",
       body: formdata,
     })
@@ -31,7 +31,7 @@ const ShowEvent = ({ visible, handleCLick, data }) => {
     const formdata = new FormData();
     formdata.append("eventId", data.eventId);
 
-    fetch("http://localhost:3000/api/deleteEvent", {
+    fetch("https://iiit-events-portal.vercel.app/api/deleteEvent", {
       method: "POST",
       body: formdata,
     })

@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const cache = "no-store";
 export async function POST(req, res) {
-  console.log("Entering addEvent route");
+  // console.log("Entering addEvent route");
 
   const data = await req.formData();
   console.log("data", data);
