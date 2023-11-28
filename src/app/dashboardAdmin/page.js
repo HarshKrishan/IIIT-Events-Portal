@@ -82,7 +82,7 @@ function Page() {
               Add Event
             </button>
           </div>
-          <div className="mt-20 w-full flex justify-center overflow-y-auto">
+          <div className="mt-20 w-full flex justify-center overflow-y-scroll h-28">
             <table className="table-auto border-4 border-slate-300 w-full">
               <thead>
                 <tr>
@@ -94,7 +94,7 @@ function Page() {
                   <th className="border-4 border-slate-300">Edit</th>
                 </tr>
               </thead>
-              <tbody className="overflow-y-scroll h-28">
+              <tbody className="">
                 {events.map((event, index) => (
                   <EventTableRow
                     //for local sql
