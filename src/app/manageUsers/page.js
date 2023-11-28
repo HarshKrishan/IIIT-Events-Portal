@@ -88,7 +88,7 @@ function Page() {
               Add User
             </button>
           </div>
-          <div className="mt-20 w-full flex justify-center overflow-y-auto">
+          <div className="mt-20 w-full flex justify-center ">
             <table className="table-auto border-4 border-slate-300 w-full">
               <thead>
                 <tr>
@@ -100,7 +100,7 @@ function Page() {
                   <th className="border-4 border-slate-300 w-20">Modify</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="overflow-y-auto">
                 {data.map((user, index) => (
                   <UserTableRow
                     key={index + 1}
