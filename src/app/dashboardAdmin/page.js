@@ -94,7 +94,7 @@ function Page() {
                   <th className="border-4 border-slate-300">Edit</th>
                 </tr>
               </thead>
-              <tbody className="overflow-y-scroll h-60">
+              <tbody className="overflow-y-scroll h-28">
                 {events.map((event, index) => (
                   <EventTableRow
                     //for local sql

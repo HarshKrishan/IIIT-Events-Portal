@@ -99,7 +99,7 @@ function Page() {
                   <th className="border-4 border-slate-300 w-20">Modify</th>
                 </tr>
               </thead>
-              <tbody className="overflow-y-scroll h-60" >
+              <tbody className="overflow-y-scroll h-28" >
                 {data.map((user, index) => (
                   <UserTableRow
                     key={index + 1}
