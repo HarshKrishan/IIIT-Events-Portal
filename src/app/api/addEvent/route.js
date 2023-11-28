@@ -1,6 +1,8 @@
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
 import { createClient } from "@vercel/postgres";
+import { getSession } from "next-auth/react";
+
 export async function POST(req) {
   console.log("Entering addEvent route");
 
@@ -16,7 +18,9 @@ export async function POST(req) {
   const fund = data.get("fund");
   const path = `./public/uploads/${name}`;
 
+  const session = await getSession();
 
+  const {email} = session.user;
 
   //for local sql
   // connectSql();
@@ -39,7 +43,7 @@ export async function POST(req) {
   await client.connect();
 
   try {
-    const { rows, fields } = await client.sql`INSERT INTO events (ename, edate, eorgemail, fundedBy, fund, links, imageuri, users_emailid) VALUES (${name}, ${date}, ${organiser}, ${fundedBy}, ${fund}, ${link}, ${name}, ${organiser})`;
+    const { rows, fields } = await client.sql`INSERT INTO events (ename, edate, eorgemail, fundedBy, fund, links, imageuri, users_emailid) VALUES (${name}, ${date}, ${organiser}, ${fundedBy}, ${fund}, ${link}, ${name}, ${email})`;
     return NextResponse.json({ result: rows }, { status: 200 });
 
   }
