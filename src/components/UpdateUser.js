@@ -57,7 +57,7 @@ const UpdateUser = ({ visible, handleCLick, data }) => {
       alert("Please fill all the fields");
       return;
     }
-    fetch("http://localhost:3000/api/updateUser", {
+    fetch("https://iiit-events-portal.vercel.app/api/updateUser", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

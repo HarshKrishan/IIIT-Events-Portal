@@ -4,14 +4,16 @@ import TopNavbar from "@/components/Navbar";
 import React, { useState, useEffect } from "react";
 import EventTableRow from "@/components/EventTableRow";
 import ShowEvent from "@/components/ShowEvent";
-import { useSession } from "next-auth/react";
+
 import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const cache = "no-store";
+
 function Page() {
   const [visible, setVisible] = useState(false);
 
-  const session = useSession();
-
-  console.log("session in dashboard",session)
 
   const [visibleShowEvent, setVisibleShowEvent] = useState(false);
 
