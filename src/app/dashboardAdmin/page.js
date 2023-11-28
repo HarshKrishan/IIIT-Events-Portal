@@ -94,22 +94,18 @@ function Page() {
                   <th className="border-4 border-slate-300">Edit</th>
                 </tr>
               </thead>
-              <tbody>
-                
-
+              <tbody className="overflow-y-scroll h-60">
                 {events.map((event, index) => (
-                  
                   <EventTableRow
-                  //for local sql
+                    //for local sql
                     // key={event.eventId}
                     // eventId={event.eventId}
                     // id={index + 1}
                     // name={event.eName}
                     // date={(()=>{
-                      
+
                     //   const date = new Date(event.eDate);
 
-                    
                     // return date.toISOString().split('T')[0];
                     // })()}
                     // organiser={event.eOrgEmail}
@@ -118,17 +114,14 @@ function Page() {
                     // link={event.links}
                     markShowEventTrue={markShowEventTrue}
                     setEventDataToShow={setEventDataToShow}
-
-
                     //for vercel sql
                     key={event.eventid}
                     eventId={event.eventid}
                     id={index + 1}
                     name={event.ename}
-                    date={(()=>{
-                      
+                    date={(() => {
                       const date = new Date(event.edate);
-                      
+
                       const year = date.getFullYear();
                       const month = date.toLocaleString("en-US", {
                         month: "long",
@@ -138,17 +131,14 @@ function Page() {
                       const minutes = date.getMinutes();
                       const seconds = date.getSeconds();
 
-                      
                       const formattedDate = `${month} ${day}, ${year}`;
 
                       return formattedDate;
                     })()}
                     organiser={event.eorgemail}
-                    fundedBy = {event.fundedby}
-                    fund = {event.fund}
+                    fundedBy={event.fundedby}
+                    fund={event.fund}
                     link={event.links}
-
-
                   />
                 ))}
               </tbody>
@@ -156,7 +146,11 @@ function Page() {
           </div>
         </div>
         <AddEvent visible={visible} handleCLick={handleCLick} />
-        <ShowEvent visible={visibleShowEvent} handleCLick={handleCLickShowEvent} data={eventDataToShow}/>
+        <ShowEvent
+          visible={visibleShowEvent}
+          handleCLick={handleCLickShowEvent}
+          data={eventDataToShow}
+        />
       </TopNavbar>
     </div>
   );
