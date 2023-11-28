@@ -3,7 +3,11 @@ import { NextResponse } from "next/server";
 
 import { writeFile,mkdir } from "fs/promises";
 import { createClient } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const cache = "no-store";
 export async function POST(req, res) {
   console.log("Entering addEvent route");
 
@@ -83,7 +87,7 @@ export async function POST(req, res) {
       // Write the file
       await writeFile(path, buffer);
       const { rows, fields } =
-        await client.sql`INSERT INTO images (imageId, imagedata, events_eventid) VALUES (${currtime}, load_file(${path}), ${parseInt(
+        await client.sql`INSERT INTO images (imageid,events_eventid) VALUES (${currtime}, ${parseInt(
           data.get("eventId")
         )})`;
     }
@@ -97,6 +101,6 @@ export async function POST(req, res) {
   } finally {
     await client.end();
   }
-
+  revalidatePath("https://iiit-events-portal.vercel.app/dashboardAdmin");
   return NextResponse.json({ result: "Error uploading images" }, { status: 200 });
 }

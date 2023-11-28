@@ -2,6 +2,10 @@ import { revalidatePath } from "next/cache";
 import connectSql, { connection } from "../connectDb/route";
 import { NextResponse } from "next/server";
 import { createClient } from "@vercel/postgres";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const cache = "no-store";
 export async function POST(req) {
   console.log("entering addUser route");
   // console.log(req);
@@ -52,7 +56,7 @@ export async function POST(req) {
   } finally {
     await client.end();
   }
-
+  revalidatePath("https://iiit-events-portal.vercel.app/manageUsers");
   return NextResponse.json({ result: "Error updating User..." }, { status: 500 });
 
 }
