@@ -6,6 +6,9 @@ const authOptions = {
   session: {
     strategy: "jwt",
   },
+  pages:{
+    signIn: "/login",
+  },
   providers: [
     CrediantialsProvider({
       name: "credentials",
