@@ -66,12 +66,7 @@ function Page() {
 
   // console.log("events",events);
 
-  console.log("session in dashboard",session)
-  // if (!session) {
 
-  //   redirect("/login");
-  //   return null;
-  // }
   return (
     <div>
       <TopNavbar>
