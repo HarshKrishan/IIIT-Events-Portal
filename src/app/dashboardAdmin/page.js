@@ -82,7 +82,7 @@ function Page() {
               Add Event
             </button>
           </div>
-          <div className="mt-20 w-full flex justify-center overflow-y-scroll h-28">
+          <div className="mt-20 w-full flex justify-center overflow-y-scroll h-72">
             <table className="table-auto border-4 border-slate-300 w-full">
               <thead>
                 <tr>
