@@ -17,5 +17,5 @@ export function middleware(request) {
   return NextResponse.redirect(new URL("/login", request.url));
 }
 export const config = {
-  matcher: ["/dashboardAdmin", "/manageUsers","/api/*"],
+  matcher: ["/dashboardAdmin", "/manageUsers","/api/:path*"],
 };
